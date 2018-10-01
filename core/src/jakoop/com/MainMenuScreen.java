@@ -49,8 +49,6 @@ public class MainMenuScreen implements Screen {
         enemy1.draw(spriteBatch);
         enemy2.draw(spriteBatch);
         enemy3.draw(spriteBatch);
-        
-        
         spriteBatch.end();
 	}
 
