@@ -24,7 +24,7 @@ public class Player {
 	 posY = 180 - height/2;
 	currentCoin = Resources.ONE_EURO;
 	lifes = 3;
-	texture = new Texture(Gdx.files.internal("Resources.IMAGE_TXAPELA"));
+	texture = new Texture(Gdx.files.internal(Resources.IMAGE_TXAPELA));
  }
  
  public void draw(SpriteBatch spriteBatch) {

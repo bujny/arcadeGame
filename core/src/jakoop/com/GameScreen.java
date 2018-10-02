@@ -2,6 +2,9 @@ package jakoop.com;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.Input.Keys;
+import com.badlogic.gdx.audio.Music;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
@@ -17,6 +20,8 @@ public class GameScreen implements Screen {
     Texture background;
     Player player;
     Enemy enemy1, enemy2, enemy3; 
+    Music stage1;
+    Sound shot;
 	
 	public GameScreen(final InvadersGame game) {
 		this.game=game;
@@ -29,7 +34,8 @@ public class GameScreen implements Screen {
         enemy1 = new Enemy(Resources.ONE_EURO,100,150);
         enemy2 = new Enemy(Resources.TWO_EURO,300,150);
         enemy3 = new Enemy(Resources.FIVE_EURO,500,150);
-        
+        stage1 = Gdx.audio.newMusic(Gdx.files.internal(Resources.MUSIC_STAGE1));
+        stage1.play();
 	}
 
 	@Override
@@ -50,6 +56,8 @@ public class GameScreen implements Screen {
         enemy2.draw(spriteBatch);
         enemy3.draw(spriteBatch);
         spriteBatch.end();
+        
+        
 	}
 
 	@Override
@@ -79,7 +87,6 @@ public class GameScreen implements Screen {
 	@Override
 	public void dispose() {
 		// TODO Auto-generated method stub
-		
 	}
 
 }
