@@ -8,7 +8,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
-public class MainMenuScreen implements Screen {
+public class GameScreen implements Screen {
 	
 	final InvadersGame game;
 	final SpriteBatch spriteBatch;
@@ -18,13 +18,13 @@ public class MainMenuScreen implements Screen {
     Player player;
     Enemy enemy1, enemy2, enemy3; 
 	
-	public MainMenuScreen(final InvadersGame game) {
+	public GameScreen(final InvadersGame game) {
 		this.game=game;
 		this.spriteBatch = game.spriteBatch;
 		camera = new OrthographicCamera();
         camera.setToOrtho(false, 1280, 720);
         //viewport = new StretchViewport(1280, 720, camera)
-        background = new Texture(Gdx.files.internal("background.bmp")); 
+        background = new Texture(Gdx.files.internal("background.png")); 
         player = new Player(); 
         enemy1 = new Enemy(Resources.ONE_EURO,100,150);
         enemy2 = new Enemy(Resources.TWO_EURO,300,150);
