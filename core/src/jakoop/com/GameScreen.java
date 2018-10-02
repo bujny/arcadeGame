@@ -24,7 +24,7 @@ public class GameScreen implements Screen {
 		camera = new OrthographicCamera();
         camera.setToOrtho(false, 1280, 720);
         //viewport = new StretchViewport(1280, 720, camera)
-        background = new Texture(Gdx.files.internal("background.png")); 
+        background = new Texture(Gdx.files.internal(Resources.IMAGE_BACKGROUND)); 
         player = new Player(); 
         enemy1 = new Enemy(Resources.ONE_EURO,100,150);
         enemy2 = new Enemy(Resources.TWO_EURO,300,150);
