@@ -28,8 +28,6 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
-import javafx.event.ActionEvent;
-
 public class Menu implements Screen{
 
 	final InvadersGame game;
@@ -54,8 +52,7 @@ public class Menu implements Screen{
 
 	@Override
 	public void dispose() {
-		// TODO Auto-generated method stub
-		
+	
 	}
 
 	@Override
@@ -159,8 +156,6 @@ public class Menu implements Screen{
 			@Override
 			public void changed(ChangeEvent arg0, Actor arg1) {
 				stage.dispose();
-				skin.dispose();
-				
 				game.dispose();
 			}
 			

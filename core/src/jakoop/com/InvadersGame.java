@@ -8,10 +8,10 @@ public class InvadersGame extends Game {
 	public SpriteBatch spriteBatch;
     //public BitmapFont font;
 	public Menu mainMenuScreen;
+	
     @Override
     public void create() {
         spriteBatch = new SpriteBatch();
-
         mainMenuScreen = new Menu(this);
         this.setScreen(mainMenuScreen);
     }
@@ -23,10 +23,7 @@ public class InvadersGame extends Game {
 
     @Override
     public void dispose() {
-
         mainMenuScreen.dispose();
-
     	Gdx.app.exit();
-
     }
 }

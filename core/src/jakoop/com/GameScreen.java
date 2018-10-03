@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
+import javax.swing.SingleSelectionModel;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.Input.Keys;
@@ -31,10 +33,10 @@ public class GameScreen implements Screen {
     Music stage1;
     Sound shot;
 	
-	public GameScreen(final InvadersGame game, int difficulty) {
+	public GameScreen(final InvadersGame game) {
 		this.game=game;
 		this.spriteBatch = game.spriteBatch;
-		this.difficulty = difficulty;
+		this.difficulty = 1;
 		chooseSettings();
 		camera = new OrthographicCamera();
         camera.setToOrtho(false, 1280, 720);
@@ -48,6 +50,7 @@ public class GameScreen implements Screen {
         initializeEnemies();
         stage1 = Gdx.audio.newMusic(Gdx.files.internal(Resources.MUSIC_STAGE3));
         stage1.play();
+        System.out.println("hola");
 	}
 
 	private void chooseSettings() {
