@@ -1,18 +1,19 @@
 package jakoop.com;
 
 import com.badlogic.gdx.Game;
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 public class InvadersGame extends Game {
 	public SpriteBatch spriteBatch;
     //public BitmapFont font;
-    public GameScreen mainMenuScreen;
-    
+	public Menu mainMenuScreen;
 
     @Override
     public void create() {
         spriteBatch = new SpriteBatch();
-        mainMenuScreen = new GameScreen(this);
+        //mainMenuScreen = new GameScreen(this);
+        mainMenuScreen = new Menu(this);
         this.setScreen(mainMenuScreen);
     }
 
@@ -23,7 +24,10 @@ public class InvadersGame extends Game {
 
     @Override
     public void dispose() {
-        spriteBatch.dispose();
+
         mainMenuScreen.dispose();
+
+    	Gdx.app.exit();
+
     }
 }
