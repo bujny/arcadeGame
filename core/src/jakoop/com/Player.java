@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
@@ -21,7 +22,7 @@ public class Player {
     Coin staticCoin;
     
     final float SPEED = 600.0f; 
-
+    Sound shoot;
 
  public Player() {
 	 width = 70;
@@ -60,7 +61,11 @@ public class Player {
 	 if(posY>360-height) posY=360-height;
 	 
 	 if(Gdx.input.isKeyJustPressed(Keys.SHIFT_LEFT) || Gdx.input.isKeyJustPressed(Keys.SHIFT_RIGHT)) changeCoin();
-	 if(Gdx.input.isKeyJustPressed(Keys.SPACE)) coins.add(new Coin(currentCoin, posX+(width/2),posY+height ));
+	 if(Gdx.input.isKeyJustPressed(Keys.SPACE)) {
+		 coins.add(new Coin(currentCoin, posX+(width/2),posY+height ));
+		 shoot = Gdx.audio.newSound(Gdx.files.internal(Resources.SOUND_THROW_COIN));
+		 shoot.play();
+	 }
  }
  
  void changeCoin() {

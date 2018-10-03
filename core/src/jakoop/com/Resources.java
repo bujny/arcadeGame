@@ -12,20 +12,20 @@ public final class Resources {
     public static final float SPEED_LVL3 = 50.0f;
     
     /** MUSIC */
-    public static final String MUSIC_MAIN = "sound\\main.wav";
-    public static final String MUSIC_STAGE1 = "sound\\stage1.wav";
-    public static final String MUSIC_STAGE2 = "sound\\stage2.wav";
-    //public static final String MUSIC_STAGE3 = "sound\\stage3.wav";
+    public static final String MUSIC_MAIN = "sound\\main.mp3";
+    public static final String MUSIC_STAGE1 = "sound\\stage1.mp3";
+    public static final String MUSIC_STAGE2 = "sound\\stage2.mp3";
+    public static final String MUSIC_STAGE3 = "sound\\stage3.mp3";
     
     /** SOUNDS */
-    public static final String SOUND_BUTTON = "sound\\button.wav";
-    public static final String SOUND_CHANGE_COIN = "sound\\changeCoin.wav";
-    public static final String SOUND_DRINK = "sound\\drink.wav";
-    public static final String SOUND_GAME_OVER = "sound\\gameOver.wav";
-    public static final String SOUND_LOOSE_LIFE = "sound\\looseLife.wav";
-    public static final String SOUND_STAGE_COMPLETE = "sound\\stageComplete.wav";
-    public static final String SOUND_THROW_COIN = "sound\\throwCoin.wav";
-    public static final String SOUND_VICTORY = "sound\\victory.wav";
+    public static final String SOUND_BUTTON = "sound\\button.mp3";
+    public static final String SOUND_CHANGE_COIN = "sound\\changeCoin.mp3";
+    public static final String SOUND_DRINK = "sound\\drink.mp3";
+    public static final String SOUND_GAME_OVER = "sound\\gameOver.mp3";
+    public static final String SOUND_LOOSE_LIFE = "sound\\looseLife.mp3";
+    public static final String SOUND_STAGE_COMPLETE = "sound\\stageComplete.mp3";
+    public static final String SOUND_THROW_COIN = "sound\\throwCoin.mp3";
+    public static final String SOUND_VICTORY = "sound\\victory.mp3";
     
     /** ENEMY ICONS */
     public static final String ENEMY_BEER = "image\\beer.png";
