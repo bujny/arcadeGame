@@ -47,7 +47,7 @@ public class GameScreen implements Screen {
         enemies = new HashMap<Enemy, Integer>();
         initializeEnemies();
         stage1 = Gdx.audio.newMusic(Gdx.files.internal(Resources.MUSIC_STAGE3));
-        //stage1.play();
+        stage1.play();
 	}
 
 	private void chooseSettings() {

@@ -8,7 +8,6 @@ public class InvadersGame extends Game {
     //public BitmapFont font;
     public GameScreen mainMenuScreen;
     
-
     @Override
     public void create() {
         spriteBatch = new SpriteBatch();
