@@ -1,6 +1,8 @@
 package jakoop.com;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 public class Coin {
 	float posX;
@@ -10,13 +12,44 @@ public class Coin {
 	Texture texture;
 	int value;
 	
+	final float SPEED = 600.0f; 
+	
 	public Coin(int value, float posX, float posY) {
 		width = 25;
 		height = 25;
 		this.posX = posX;
+		this.posX -= width/2; 
 		this.posY = posY;
-		
-		
+		if(value == Resources.ONE_EURO) {
+			texture = new Texture(Gdx.files.internal("one.png"));
+		}
+		else if(value == Resources.TWO_EURO) {
+				texture = new Texture(Gdx.files.internal("two.png"));
+			} 
+		else if(value == Resources.FIVE_EURO) {
+			texture = new Texture(Gdx.files.internal("five.png"));
+		}
+	}
+	
+	public boolean isOut() {
+		if(posY>1280) return true;
+		return false; 
+	}
+	
+	public void draw(SpriteBatch spriteBatch) {
+		spriteBatch.draw(texture, posX, posY, width, height);
+		movement();
+	}
+	
+	public void drawStatic(SpriteBatch spriteBatch) {
+		width=50;
+		height=50;
+		spriteBatch.draw(texture, posX, posY, width, height);
+	}
+	
+	void movement() {
+		float deltaTime = Gdx.graphics.getDeltaTime();
+		posY += deltaTime * SPEED;
 	}
 	
 	
