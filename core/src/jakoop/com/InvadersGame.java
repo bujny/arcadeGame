@@ -12,7 +12,7 @@ public class InvadersGame extends Game {
     @Override
     public void create() {
         spriteBatch = new SpriteBatch();
-        mainMenuScreen = new GameScreen(this);
+        mainMenuScreen = new GameScreen(this, 1);
         this.setScreen(mainMenuScreen);
     }
 

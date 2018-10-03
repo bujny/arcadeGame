@@ -1,5 +1,10 @@
 package jakoop.com;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Random;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.Input.Keys;
@@ -15,27 +20,64 @@ public class GameScreen implements Screen {
 	
 	final InvadersGame game;
 	final SpriteBatch spriteBatch;
+	final int difficulty;
+	float speed;
+	int[] enemiesDimension;
     OrthographicCamera camera;
     Viewport viewport;
     Texture background;
     Player player;
-    Enemy enemy1, enemy2, enemy3; 
+    Map<Enemy, Integer> enemies;
     Music stage1;
     Sound shot;
 	
-	public GameScreen(final InvadersGame game) {
+	public GameScreen(final InvadersGame game, int difficulty) {
 		this.game=game;
 		this.spriteBatch = game.spriteBatch;
+		this.difficulty = difficulty;
+		chooseSettings();
 		camera = new OrthographicCamera();
         camera.setToOrtho(false, 1280, 720);
         //viewport = new StretchViewport(1280, 720, camera)
+
         background = new Texture(Gdx.files.internal(Resources.IMAGE_BACKGROUND)); 
         player = new Player(); 
-        enemy1 = new Enemy(Resources.ONE_EURO,100,150);
-        enemy2 = new Enemy(Resources.TWO_EURO,300,150);
-        enemy3 = new Enemy(Resources.FIVE_EURO,500,150);
+
+
+        enemies = new HashMap<Enemy, Integer>();
+        initializeEnemies();
         stage1 = Gdx.audio.newMusic(Gdx.files.internal(Resources.MUSIC_STAGE1));
         stage1.play();
+	}
+
+	private void chooseSettings() {
+		enemiesDimension = new int[2];
+		enemiesDimension[0]=6*difficulty; //rows
+		enemiesDimension[1]=Resources.COLUMNS; //columns
+		switch(difficulty) {
+		case 1: speed = Resources.SPEED_LVL1;
+			break;
+		case 2: speed = Resources.SPEED_LVL2;
+			break;
+		case 3: speed = Resources.SPEED_LVL3;
+			break;
+		default: speed = Resources.SPEED_LVL1;
+			break;
+		}
+	}
+
+	private void initializeEnemies() {
+		Random rand = new Random();
+		int enemyNum;
+		Enemy enemy;
+		
+		for(int rows=0; rows<enemiesDimension[0]; rows++) {
+			for(int columns=0; columns<enemiesDimension[1]; columns++) {
+				enemyNum = rand.nextInt(3)+1;
+				enemy = new Enemy(enemyNum,128+256*columns,(720+90*rows)); 
+				enemies.put(enemy, rows);
+			}
+		}
 	}
 
 	@Override
@@ -52,12 +94,18 @@ public class GameScreen implements Screen {
         spriteBatch.begin();
         spriteBatch.draw(background,0,0);
         player.draw(spriteBatch);
-        enemy1.draw(spriteBatch);
-        enemy2.draw(spriteBatch);
-        enemy3.draw(spriteBatch);
+
+        drawEnemies();
         spriteBatch.end();
         
         
+	}
+
+	private void drawEnemies() {
+		Enemy enemy;
+		for (Map.Entry<Enemy, Integer> entry : enemies.entrySet()) {
+		    entry.getKey().draw(spriteBatch, speed);
+		}
 	}
 
 	@Override
