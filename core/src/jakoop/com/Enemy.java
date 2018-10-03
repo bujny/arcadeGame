@@ -1,6 +1,7 @@
 package jakoop.com;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
@@ -34,12 +35,30 @@ public class Enemy {
 		}
 	}
 		
-		public void draw(SpriteBatch spriteBatch) {
+		public void draw(SpriteBatch spriteBatch, float speed) {
 			spriteBatch.draw(texture, posX, posY, width, height);
+			movement(speed);
 		}
-		
 
-	
-	
-	
+		private void movement(float speed) {
+			 float deltaTime = Gdx.graphics.getDeltaTime();
+			 posY -= deltaTime * speed;
+			 if(posY<75) posY=75;
+		}
+
+		public float getPosX() {
+			return posX;
+		}
+
+		public void setPosX(float posX) {
+			this.posX = posX;
+		}
+
+		public float getPosY() {
+			return posY;
+		}
+
+		public void setPosY(float posY) {
+			this.posY = posY;
+		}	
 }
