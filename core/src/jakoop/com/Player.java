@@ -22,6 +22,7 @@ public class Player {
     
     final float SPEED = 600.0f; 
     Sound shoot;
+    Sound changeCoin;
 
  public Player() {
 	 width = 70;
@@ -84,6 +85,8 @@ public class Player {
 		 staticCoin = new Coin(currentCoin, 605, 15);
 		 return;
 	 }
+	 changeCoin = Gdx.audio.newSound(Gdx.files.internal(Resources.SOUND_CHANGE_COIN));
+	 changeCoin.play();
  }
  
  public ArrayList<Coin> getCoins() {

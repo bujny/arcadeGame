@@ -8,6 +8,7 @@ import javax.swing.JButton;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
@@ -38,6 +39,7 @@ public class Menu implements Screen{
     Stage stage;
     TextButton startB, exitB;
     Skin skin;
+    Sound button;
     public GameScreen mainGameScreen;
 
     
@@ -137,9 +139,12 @@ public class Menu implements Screen{
 			@Override
 			public void changed(ChangeEvent arg0, Actor arg1) {
 				System.out.println("entra");
+				button = Gdx.audio.newSound(Gdx.files.internal(Resources.SOUND_BUTTON));
+	        	button.play();
 				GameScreen gameScreen = new GameScreen(game);
 				game.setScreen(gameScreen);
-				
+				startB.setDisabled(true);
+				exitB.setDisabled(true);
 			}
 			
 	    });
@@ -155,6 +160,8 @@ public class Menu implements Screen{
 	       
 			@Override
 			public void changed(ChangeEvent arg0, Actor arg1) {
+				button = Gdx.audio.newSound(Gdx.files.internal(Resources.SOUND_BUTTON));
+	        	button.play();
 				stage.dispose();
 				game.dispose();
 			}

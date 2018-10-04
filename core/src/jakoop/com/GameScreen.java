@@ -32,10 +32,15 @@ public class GameScreen implements Screen {
     Texture background;
     Player player;
     Music stage1;
-    Sound shot;
+    Sound youLose;
+    Sound loseLife;
+    Sound drinkHit;
+    Sound stageComplete;
     EnemyWave enemies;
     boolean isGameOver;
+    boolean hasWon;
     Texture gameOver;
+    Texture youWin;
 	
 	public GameScreen(final InvadersGame game) {
 		this.isGameOver = false;
@@ -52,6 +57,7 @@ public class GameScreen implements Screen {
         stage1 = Gdx.audio.newMusic(Gdx.files.internal(Resources.MUSIC_STAGE3));
         stage1.play();
         gameOver = new Texture(Gdx.files.internal("image\\gameover.png"));
+        youWin = new Texture(Gdx.files.internal("image\\youWin.png"));
 	}
 
 	private void chooseSettings() {
@@ -84,8 +90,18 @@ public class GameScreen implements Screen {
         spriteBatch.begin();
         spriteBatch.draw(background,0,0);
         if(isGameOver) {
+        	stage1.stop();
+            youLose = Gdx.audio.newSound(Gdx.files.internal(Resources.SOUND_GAME_OVER));
+        	youLose.play();
         	spriteBatch.draw(gameOver, 340, 300, 600, 300);
         	
+        	if(Gdx.input.isKeyPressed(Keys.ANY_KEY)) {
+        	this.dispose();
+        	game.setScreen(new Menu(game));}
+        }
+        else if(hasWon) {
+			stage1.stop();        	
+        	spriteBatch.draw(youWin, 340, 300, 600, 300);
         	if(Gdx.input.isKeyPressed(Keys.ANY_KEY)) {
         	this.dispose();
         	game.setScreen(new Menu(game));}
@@ -113,11 +129,19 @@ public class GameScreen implements Screen {
 					break;
 				case 1: iteratorCoin.remove();
 						player.menosLife();
-						isGameOver = player.isGameOver();		
+			            loseLife = Gdx.audio.newSound(Gdx.files.internal(Resources.SOUND_LOOSE_LIFE));
+			        	loseLife.play();
+						isGameOver = player.isGameOver();
 					break;
 				case 2: iteratorCoin.remove();
 		    			iteratorEnemy.remove();
-		    			if(enemies.getEnemies().isEmpty()) //youWin
+		    			drinkHit = Gdx.audio.newSound(Gdx.files.internal(Resources.SOUND_DRINK));
+			        	drinkHit.play();
+		    			if(enemies.getEnemies().isEmpty()) {
+		    				stageComplete = Gdx.audio.newSound(Gdx.files.internal(Resources.SOUND_STAGE_COMPLETE));
+		    	        	stageComplete.play();
+		    				hasWon = true;
+		    			}
 					break;
 				default: 
 					break;
