@@ -22,13 +22,13 @@ public class Coin {
 		this.posY = posY;
 		this.value = value;
 		if(value == Resources.ONE_EURO) {
-			texture = new Texture(Gdx.files.internal("one.png"));
+			texture = new Texture(Gdx.files.internal(Resources.COIN_ONE));
 		}
 		else if(value == Resources.TWO_EURO) {
-				texture = new Texture(Gdx.files.internal("two.png"));
+				texture = new Texture(Gdx.files.internal(Resources.COIN_TWO));
 			} 
 		else if(value == Resources.FIVE_EURO) {
-			texture = new Texture(Gdx.files.internal("five.png"));
+			texture = new Texture(Gdx.files.internal(Resources.COIN_FIVE));
 		}
 	}
 	

@@ -8,6 +8,7 @@ import javax.swing.JButton;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
@@ -29,7 +30,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
-public class Menu implements Screen{
+public class Menu implements Screen {
 
 	final InvadersGame game;
 	final SpriteBatch spriteBatch;
@@ -40,6 +41,7 @@ public class Menu implements Screen{
     TextButton startB, exitB;
     Skin skin;
     Sound button;
+    Music main;
     public GameScreen mainGameScreen;
 
     
@@ -49,7 +51,10 @@ public class Menu implements Screen{
 		camera = new OrthographicCamera();
         camera.setToOrtho(false, 1280, 720);
         //viewport = new StretchViewport(1280, 720, camera)
-        background = new Texture(Gdx.files.internal("main.png")); 
+        background = new Texture(Gdx.files.internal(Resources.IMAGE_MAIN));
+        main = Gdx.audio.newMusic(Gdx.files.internal(Resources.MUSIC_MAIN));
+        main.play();
+        main.setVolume(0.6f);
 	}
 
 	@Override
@@ -77,9 +82,7 @@ public class Menu implements Screen{
         spriteBatch.begin();
         spriteBatch.draw(background,0,0);
         spriteBatch.end();
-        stage.draw();
-
-		
+        stage.draw();	
 	}
 
 	@Override
@@ -138,9 +141,9 @@ public class Menu implements Screen{
 	       
 			@Override
 			public void changed(ChangeEvent arg0, Actor arg1) {
-				System.out.println("entra");
 				button = Gdx.audio.newSound(Gdx.files.internal(Resources.SOUND_BUTTON));
 	        	button.play();
+	        	main.stop();
 				GameScreen gameScreen = new GameScreen(game);
 				game.setScreen(gameScreen);
 				startB.setDisabled(true);
@@ -162,6 +165,7 @@ public class Menu implements Screen{
 			public void changed(ChangeEvent arg0, Actor arg1) {
 				button = Gdx.audio.newSound(Gdx.files.internal(Resources.SOUND_BUTTON));
 	        	button.play();
+	        	main.stop();
 				stage.dispose();
 				game.dispose();
 			}

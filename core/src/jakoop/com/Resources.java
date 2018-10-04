@@ -1,10 +1,9 @@
 package jakoop.com;
 
 public final class Resources {
-	/** COINS */
+	/** GENERAL VALUE */
     public static final int ONE_EURO = 1; 
     public static final int TWO_EURO = 2;
-
     public static final int FIVE_EURO = 3; 
     public static final int COLUMNS = 5;
     public static final float SPEED_LVL1 = 20.0f; 
@@ -33,12 +32,17 @@ public final class Resources {
     public static final String ENEMY_SHOT = "image\\shot.png";
     
     /** COIN ICONS */
-    public static final String ENEMY_ONE = "image\\one.png";
-    public static final String ENEMY_TWO = "image\\two.png";
-    public static final String ENEMY_FIVE = "image\\five.png";
+    public static final String COIN_ONE = "image\\one.png";
+    public static final String COIN_TWO = "image\\two.png";
+    public static final String COIN_FIVE = "image\\five.png";
     
     /** GENERAL IMAGES */
+    public static final String IMAGE_MAIN = "image\\main.png";
+	public static final String IMAGE_STAGE_BACKGROUND = "image\\stageBackground.png";
 	public static final String IMAGE_BACKGROUND = "image\\background.png";
+	public static final String IMAGE_PRESS_KEY = "image\\pressAnyKey.png";
+	public static final String IMAGE_YOU_WIN= "image\\youWin.png";
+	public static final String IMAGE_GAME_OVER = "image\\gameOver.png";
 	public static final String IMAGE_TXAPELA = "image\\txapela.png";
 	public static final String IMAGE_HEART = "image\\heart.png";
 	

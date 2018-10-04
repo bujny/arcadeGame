@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
+import javax.print.DocFlavor.READER;
 import javax.swing.SingleSelectionModel;
 
 import com.badlogic.gdx.Gdx;
@@ -29,21 +30,26 @@ public class GameScreen implements Screen {
 	int[] enemiesDimension;
     OrthographicCamera camera;
     Viewport viewport;
+    Texture stageBackground;
     Texture background;
     Player player;
     Music stage1;
     Sound youLose;
+    Sound victory;
     Sound loseLife;
     Sound drinkHit;
     Sound stageComplete;
     EnemyWave enemies;
     boolean isGameOver;
     boolean hasWon;
+	boolean stageFinished;
     Texture gameOver;
     Texture youWin;
+    Texture pressKey;
 	
 	public GameScreen(final InvadersGame game) {
 		this.isGameOver = false;
+		this.stageFinished = false;
 		this.game=game;
 		this.spriteBatch = game.spriteBatch;
 		this.difficulty = 1;
@@ -52,12 +58,15 @@ public class GameScreen implements Screen {
 		camera = new OrthographicCamera();
         camera.setToOrtho(false, 1280, 720);
         //viewport = new StretchViewport(1280, 720, camera)
-        background = new Texture(Gdx.files.internal(Resources.IMAGE_BACKGROUND)); 
+        stageBackground = new Texture(Gdx.files.internal(Resources.IMAGE_STAGE_BACKGROUND));
+        background = new Texture(Gdx.files.internal(Resources.IMAGE_BACKGROUND));
         player = new Player(); 
         stage1 = Gdx.audio.newMusic(Gdx.files.internal(Resources.MUSIC_STAGE3));
         stage1.play();
-        gameOver = new Texture(Gdx.files.internal("image\\gameover.png"));
-        youWin = new Texture(Gdx.files.internal("image\\youWin.png"));
+        stage1.setVolume(0.1f);
+        gameOver = new Texture(Gdx.files.internal(Resources.IMAGE_GAME_OVER));
+        youWin = new Texture(Gdx.files.internal(Resources.IMAGE_YOU_WIN));
+        pressKey = new Texture(Gdx.files.internal(Resources.IMAGE_PRESS_KEY));
 	}
 
 	private void chooseSettings() {
@@ -88,25 +97,34 @@ public class GameScreen implements Screen {
         camera.update();
         spriteBatch.setProjectionMatrix(camera.combined);
         spriteBatch.begin();
-        spriteBatch.draw(background,0,0);
-        if(isGameOver) {
+        
+        if(isGameOver && !stageFinished) {
         	stage1.stop();
             youLose = Gdx.audio.newSound(Gdx.files.internal(Resources.SOUND_GAME_OVER));
-        	youLose.play();
-        	spriteBatch.draw(gameOver, 340, 300, 600, 300);
-        	
-        	if(Gdx.input.isKeyPressed(Keys.ANY_KEY)) {
-        	this.dispose();
-        	game.setScreen(new Menu(game));}
+            youLose.play();
+            stageFinished = true;
         }
-        else if(hasWon) {
-			stage1.stop();        	
-        	spriteBatch.draw(youWin, 340, 300, 600, 300);
+        else if(hasWon && !stageFinished) {
+			stage1.stop();   
+			victory = Gdx.audio.newSound(Gdx.files.internal(Resources.SOUND_VICTORY));
+			victory.play();
+			stageFinished = true;
+        }
+        else if(stageFinished) {
+        	spriteBatch.draw(background,0,0);
+        	spriteBatch.draw(pressKey, 350, 70, 600, 100);
+        	if(isGameOver) {
+        		spriteBatch.draw(gameOver, 340, 220, 600, 300);
+        	} else if (hasWon) {
+        		spriteBatch.draw(youWin, 340, 220, 600, 300);           	
+        	}
         	if(Gdx.input.isKeyPressed(Keys.ANY_KEY)) {
-        	this.dispose();
-        	game.setScreen(new Menu(game));}
+        		this.dispose();
+            	game.setScreen(new Menu(game));
+            }
         }
         else {
+        spriteBatch.draw(stageBackground,0,0);	
         player.draw(spriteBatch);
         enemies.drawEnemies(spriteBatch);
         checkConflicts();
@@ -167,10 +185,7 @@ public class GameScreen implements Screen {
 				player.posY+player.height>enemy.posY&&
 				player.posY<enemy.posY+enemy.height) return true;
 		if(enemy.posY<70) return true;
-		return false;
-		
-		
-		
+		return false;	
 	}
 
 	private int checkPos(Coin c, Enemy enemy) {
