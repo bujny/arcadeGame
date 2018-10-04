@@ -42,7 +42,6 @@ public class Enemy {
 		private void movement(float speed) {
 			 float deltaTime = Gdx.graphics.getDeltaTime();
 			 posY -= deltaTime * speed;
-			 if(posY<75) posY=75;
 		}
 
 		public float getPosX() {

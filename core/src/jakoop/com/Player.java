@@ -14,7 +14,7 @@ public class Player {
 	float width;
 	float height; 
 	int currentCoin;
-	int lifes; 
+	Lifes lifes; 
     Texture texture;
     ArrayList<Coin> coins;
     
@@ -30,7 +30,7 @@ public class Player {
 	 posY = 180 - height/2;
 	currentCoin = Resources.ONE_EURO;
 	staticCoin = new Coin(currentCoin, 605, 15);
-	lifes = 3;
+	lifes = new Lifes();
 	texture = new Texture(Gdx.files.internal(Resources.IMAGE_TXAPELA));
 	coins = new ArrayList<Coin>(); 
  }
@@ -38,6 +38,7 @@ public class Player {
  public void draw(SpriteBatch spriteBatch) {
 	 spriteBatch.draw(texture, posX, posY, width, height);
 	 staticCoin.drawStatic(spriteBatch);
+	 lifes.draw(spriteBatch);
 	 movement();
 	 for (int i = 0; i < coins.size(); i++) {
 		Coin coin = coins.get(i);
@@ -88,4 +89,10 @@ public class Player {
  public ArrayList<Coin> getCoins() {
 	 return coins;
 	} 
+ public void menosLife() {
+	 lifes.menosLife();
+ }
+ public boolean isGameOver() {
+	 return lifes.isGameOver();
+ }
 }

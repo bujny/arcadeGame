@@ -34,8 +34,11 @@ public class GameScreen implements Screen {
     Music stage1;
     Sound shot;
     EnemyWave enemies;
+    boolean isGameOver;
+    Texture gameOver;
 	
 	public GameScreen(final InvadersGame game) {
+		this.isGameOver = false;
 		this.game=game;
 		this.spriteBatch = game.spriteBatch;
 		this.difficulty = 1;
@@ -48,7 +51,7 @@ public class GameScreen implements Screen {
         player = new Player(); 
         stage1 = Gdx.audio.newMusic(Gdx.files.internal(Resources.MUSIC_STAGE3));
         stage1.play();
-        System.out.println("hola");
+        gameOver = new Texture(Gdx.files.internal("image\\gameover.png"));
 	}
 
 	private void chooseSettings() {
@@ -80,9 +83,19 @@ public class GameScreen implements Screen {
         spriteBatch.setProjectionMatrix(camera.combined);
         spriteBatch.begin();
         spriteBatch.draw(background,0,0);
+        if(isGameOver) {
+        	spriteBatch.draw(gameOver, 340, 300, 600, 300);
+        	
+        	if(Gdx.input.isKeyPressed(Keys.ANY_KEY)) {
+        	this.dispose();
+        	game.setScreen(new Menu(game));}
+        }
+        else {
         player.draw(spriteBatch);
         enemies.drawEnemies(spriteBatch);
         checkConflicts();
+        playerEnemyConflict();
+        }
         spriteBatch.end();
 	}
 
@@ -99,17 +112,41 @@ public class GameScreen implements Screen {
 				case 0:
 					break;
 				case 1: iteratorCoin.remove();
-						removeLife
+						player.menosLife();
+						isGameOver = player.isGameOver();		
 					break;
 				case 2: iteratorCoin.remove();
 		    			iteratorEnemy.remove();
-		    			if(enemies.getEnemies().isEmpty()) youWin
+		    			if(enemies.getEnemies().isEmpty()) //youWin
 					break;
 				default: 
 					break;
 				}
 			}
 		}
+	}
+	
+	private void playerEnemyConflict() {
+		
+		Iterator<Map.Entry<Enemy,Integer>> iteratorEnemy = enemies.getEnemies().entrySet().iterator();
+		while (iteratorEnemy.hasNext()) {
+		    Map.Entry<Enemy,Integer> entry = iteratorEnemy.next();    
+				if(enemyHitPlayer(entry.getKey())) {
+					isGameOver=true;
+				}
+		}
+	}
+	
+	private boolean enemyHitPlayer(Enemy enemy) { 
+		if(player.posX+player.width>enemy.posX &&
+				player.posX<enemy.posX+enemy.width&&
+				player.posY+player.height>enemy.posY&&
+				player.posY<enemy.posY+enemy.height) return true;
+		if(enemy.posY<70) return true;
+		return false;
+		
+		
+		
 	}
 
 	private int checkPos(Coin c, Enemy enemy) {
@@ -150,6 +187,7 @@ public class GameScreen implements Screen {
 
 	@Override
 	public void dispose() {
+		stage1.dispose(); 
 		// TODO Auto-generated method stub
 	}
 
