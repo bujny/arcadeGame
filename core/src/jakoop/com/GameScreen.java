@@ -1,6 +1,8 @@
 package jakoop.com;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
@@ -29,25 +31,21 @@ public class GameScreen implements Screen {
     Viewport viewport;
     Texture background;
     Player player;
-    Map<Enemy, Integer> enemies;
     Music stage1;
     Sound shot;
+    EnemyWave enemies;
 	
 	public GameScreen(final InvadersGame game) {
 		this.game=game;
 		this.spriteBatch = game.spriteBatch;
 		this.difficulty = 1;
 		chooseSettings();
+		enemies = new EnemyWave(enemiesDimension, speed);
 		camera = new OrthographicCamera();
         camera.setToOrtho(false, 1280, 720);
         //viewport = new StretchViewport(1280, 720, camera)
-
         background = new Texture(Gdx.files.internal(Resources.IMAGE_BACKGROUND)); 
         player = new Player(); 
-
-
-        enemies = new HashMap<Enemy, Integer>();
-        initializeEnemies();
         stage1 = Gdx.audio.newMusic(Gdx.files.internal(Resources.MUSIC_STAGE3));
         stage1.play();
         System.out.println("hola");
@@ -69,20 +67,6 @@ public class GameScreen implements Screen {
 		}
 	}
 
-	private void initializeEnemies() {
-		Random rand = new Random();
-		int enemyNum;
-		Enemy enemy;
-		
-		for(int rows=0; rows<enemiesDimension[0]; rows++) {
-			for(int columns=0; columns<enemiesDimension[1]; columns++) {
-				enemyNum = rand.nextInt(3)+1;
-				enemy = new Enemy(enemyNum,128+256*columns,(720+90*rows)); 
-				enemies.put(enemy, rows);
-			}
-		}
-	}
-
 	@Override
 	public void show() {
 		// TODO Auto-generated method stub
@@ -97,18 +81,47 @@ public class GameScreen implements Screen {
         spriteBatch.begin();
         spriteBatch.draw(background,0,0);
         player.draw(spriteBatch);
-
-        drawEnemies();
+        enemies.drawEnemies(spriteBatch);
+        checkConflicts();
         spriteBatch.end();
-        
-        
 	}
 
-	private void drawEnemies() {
-		Enemy enemy;
-		for (Map.Entry<Enemy, Integer> entry : enemies.entrySet()) {
-		    entry.getKey().draw(spriteBatch, speed);
+	private void checkConflicts() {
+		ArrayList<Coin> coins = player.getCoins();
+		
+		Iterator<Map.Entry<Enemy,Integer>> iteratorEnemy = enemies.getEnemies().entrySet().iterator();
+		while (iteratorEnemy.hasNext()) {
+		    Map.Entry<Enemy,Integer> entry = iteratorEnemy.next();
+			for (Iterator<Coin> iteratorCoin = coins.iterator(); iteratorCoin.hasNext(); ) {
+			    Coin c = iteratorCoin.next();	    
+			    
+				switch(checkPos(c, entry.getKey())) {
+				case 0:
+					break;
+				case 1: iteratorCoin.remove();
+						removeLife
+					break;
+				case 2: iteratorCoin.remove();
+		    			iteratorEnemy.remove();
+		    			if(enemies.getEnemies().isEmpty()) youWin
+					break;
+				default: 
+					break;
+				}
+			}
 		}
+	}
+
+	private int checkPos(Coin c, Enemy enemy) {
+		if(((c.getPosX()+c.getWidth()) > enemy.getPosX()) &&
+				(c.getPosX() < (enemy.getPosX()+enemy.getWidth())) &&
+				((c.getPosY()+c.getHeight()) > enemy.getPosY()) &&
+				(c.getPosY() < (enemy.getPosY()+enemy.getHeight()))) {
+			
+			if(c.getValue() == enemy.getValue()) return 2;
+			else return 1;
+		}
+		return 0;
 	}
 
 	@Override

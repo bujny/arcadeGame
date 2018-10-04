@@ -20,6 +20,7 @@ public class Coin {
 		this.posX = posX;
 		this.posX -= width/2; 
 		this.posY = posY;
+		this.value = value;
 		if(value == Resources.ONE_EURO) {
 			texture = new Texture(Gdx.files.internal("one.png"));
 		}
@@ -51,7 +52,24 @@ public class Coin {
 		float deltaTime = Gdx.graphics.getDeltaTime();
 		posY += deltaTime * SPEED;
 	}
-	
-	
 
+	public float getPosX() {
+		return posX;
+	}
+
+	public float getPosY() {
+		return posY;
+	}
+
+	public float getWidth() {
+		return width;
+	}
+
+	public float getHeight() {
+		return height;
+	}
+
+	public int getValue() {
+		return value;
+	}
 }

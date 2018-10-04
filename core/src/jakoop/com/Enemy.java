@@ -1,7 +1,6 @@
 package jakoop.com;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
@@ -60,5 +59,17 @@ public class Enemy {
 
 		public void setPosY(float posY) {
 			this.posY = posY;
-		}	
+		}
+
+		public float getWidth() {
+			return width;
+		}
+
+		public float getHeight() {
+			return height;
+		}
+
+		public int getValue() {
+			return value;
+		}
 }

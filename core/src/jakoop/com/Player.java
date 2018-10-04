@@ -1,7 +1,6 @@
 package jakoop.com;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
@@ -84,6 +83,9 @@ public class Player {
 		 staticCoin = new Coin(currentCoin, 605, 15);
 		 return;
 	 }
-	 
  }
+ 
+ public ArrayList<Coin> getCoins() {
+	 return coins;
+	} 
 }
