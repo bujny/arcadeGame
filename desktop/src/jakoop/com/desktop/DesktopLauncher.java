@@ -12,6 +12,7 @@ public class DesktopLauncher {
 		config.title = "Pintxo Pote Invaders";
 		config.height = 720;
 		config.width = 1280;
+		config.resizable = false; 
 		config.addIcon(Resources.GAME_ICON_128, FileType.Internal);
 		config.addIcon(Resources.GAME_ICON_32, FileType.Internal);
 		config.addIcon(Resources.GAME_ICON_16, FileType.Internal);
