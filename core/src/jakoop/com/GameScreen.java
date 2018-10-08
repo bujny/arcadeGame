@@ -12,33 +12,31 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.utils.viewport.Viewport;
 
 public class GameScreen implements Screen {
 
-	final InvadersGame game;
-	final SpriteBatch spriteBatch;
-	final int difficulty;
-	float speed;
-	int[] enemiesDimension;
-	OrthographicCamera camera;
-	Viewport viewport;
-	Texture stageBackground;
-	Texture background;
-	Player player;
-	Music stage1;
-	Sound youLose;
-	Sound victory;
-	Sound loseLife;
-	Sound drinkHit;
-	Sound stageComplete;
-	EnemyWave enemies;
-	boolean isGameOver;
-	boolean hasWon;
-	boolean stageFinished;
-	Texture gameOver;
-	Texture youWin;
-	Texture pressKey;
+	private final InvadersGame game;
+	private final SpriteBatch spriteBatch;
+	private final int difficulty;
+	private float speed;
+	private int[] enemiesDimension;
+	private OrthographicCamera camera;
+	private Texture stageBackground;
+	private Texture background;
+	private Player player;
+	private Music stage;
+	private Sound youLose;
+	private Sound victory;
+	private Sound loseLife;
+	private Sound drinkHit;
+	private Sound stageComplete;
+	private EnemyWave enemies;
+	private boolean isGameOver;
+	private boolean hasWon;
+	private boolean stageFinished;
+	private Texture gameOver;
+	private Texture youWin;
+	private Texture pressKey;
 
 	public GameScreen(final InvadersGame game) {
 		this.isGameOver = false;
@@ -54,9 +52,9 @@ public class GameScreen implements Screen {
 		stageBackground = new Texture(Gdx.files.internal(Resources.IMAGE_STAGE_BACKGROUND));
 		background = new Texture(Gdx.files.internal(Resources.IMAGE_BACKGROUND));
 		player = new Player();
-		stage1 = Gdx.audio.newMusic(Gdx.files.internal(Resources.MUSIC_STAGE3));
-		stage1.play();
-		stage1.setVolume(0.1f);
+		stage = Gdx.audio.newMusic(Gdx.files.internal(Resources.MUSIC_STAGE));
+		stage.play();
+		stage.setVolume(0.1f);
 		gameOver = new Texture(Gdx.files.internal(Resources.IMAGE_GAME_OVER));
 		youWin = new Texture(Gdx.files.internal(Resources.IMAGE_YOU_WIN));
 		pressKey = new Texture(Gdx.files.internal(Resources.IMAGE_PRESS_KEY));
@@ -66,20 +64,7 @@ public class GameScreen implements Screen {
 		enemiesDimension = new int[2];
 		enemiesDimension[0] = 6 * difficulty; // rows
 		enemiesDimension[1] = Resources.COLUMNS; // columns
-		switch (difficulty) {
-		case 1:
-			speed = Resources.SPEED_LVL1;
-			break;
-		case 2:
-			speed = Resources.SPEED_LVL2;
-			break;
-		case 3:
-			speed = Resources.SPEED_LVL3;
-			break;
-		default:
-			speed = Resources.SPEED_LVL1;
-			break;
-		}
+		speed = Resources.SPEED_LVL;
 	}
 
 	@Override
@@ -96,12 +81,12 @@ public class GameScreen implements Screen {
 		spriteBatch.begin();
 
 		if (isGameOver && !stageFinished) {
-			stage1.stop();
+			stage.stop();
 			youLose = Gdx.audio.newSound(Gdx.files.internal(Resources.SOUND_GAME_OVER));
 			youLose.play();
 			stageFinished = true;
 		} else if (hasWon && !stageFinished) {
-			stage1.stop();
+			stage.stop();
 			victory = Gdx.audio.newSound(Gdx.files.internal(Resources.SOUND_VICTORY));
 			victory.play();
 			stageFinished = true;
@@ -223,7 +208,7 @@ public class GameScreen implements Screen {
 
 	@Override
 	public void dispose() {
-		stage1.dispose();
+		stage.dispose();
 		// TODO Auto-generated method stub
 	}
 

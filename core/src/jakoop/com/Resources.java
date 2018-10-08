@@ -6,15 +6,11 @@ public final class Resources {
     public static final int TWO_EURO = 2;
     public static final int FIVE_EURO = 3; 
     public static final int COLUMNS = 5;
-    public static final float SPEED_LVL1 = 20.0f; 
-    public static final float SPEED_LVL2 = 35.0f;
-    public static final float SPEED_LVL3 = 50.0f;
+    public static final float SPEED_LVL = 20.0f;
     
     /** MUSIC */
     public static final String MUSIC_MAIN = "sound\\main.mp3";
-    public static final String MUSIC_STAGE1 = "sound\\stage1.mp3";
-    public static final String MUSIC_STAGE2 = "sound\\stage2.mp3";
-    public static final String MUSIC_STAGE3 = "sound\\stage3.mp3";
+    public static final String MUSIC_STAGE = "sound\\stage.mp3";
     
     /** SOUNDS */
     public static final String SOUND_BUTTON = "sound\\button.mp3";
@@ -36,15 +32,23 @@ public final class Resources {
     public static final String COIN_TWO = "image\\two.png";
     public static final String COIN_FIVE = "image\\five.png";
     
-    /** GENERAL IMAGES */
+    /** BACKGROUND IMAGES */
     public static final String IMAGE_MAIN = "image\\main.png";
 	public static final String IMAGE_STAGE_BACKGROUND = "image\\stageBackground.png";
 	public static final String IMAGE_BACKGROUND = "image\\background.png";
+	public static final String IMAGE_CREDITS = "image\\credits.png";
+	public static final String IMAGE_HALL_OF_FAME = "image\\hallOfFame.png";
+	public static final String IMAGE_HOW_TO_PLAY = "image\\howToPlay.png";
+	public static final String IMAGE_SELECT_PLAYER = "image\\selectPlayer.png";
+	
+    /** GENERAL IMAGES */
 	public static final String IMAGE_PRESS_KEY = "image\\pressAnyKey.png";
 	public static final String IMAGE_YOU_WIN= "image\\youWin.png";
 	public static final String IMAGE_GAME_OVER = "image\\gameOver.png";
 	public static final String IMAGE_TXAPELA = "image\\txapela.png";
 	public static final String IMAGE_HEART = "image\\heart.png";
+	public static final String IMAGE_RB_SELECTED = "image\\rbSelected.png";
+	public static final String IMAGE_RB_NOT_SELECTED = "image\\rbNotSelected.png";
 	
 	/** GAME ICON */
 	 public static final String GAME_ICON_128 = "icon\\icon_128.png";
