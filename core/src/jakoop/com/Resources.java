@@ -48,7 +48,6 @@ public final class Resources {
 	public static final String IMAGE_TXAPELA = "image\\txapela.png";
 	public static final String IMAGE_HEART = "image\\heart.png";
 	public static final String IMAGE_RB_SELECTED = "image\\rbSelected.png";
-	public static final String IMAGE_RB_NOT_SELECTED = "image\\rbNotSelected.png";
 	
 	/** GAME ICON */
 	 public static final String GAME_ICON_128 = "icon\\icon_128.png";

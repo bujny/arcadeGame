@@ -31,6 +31,7 @@ public class Menu implements Screen {
 	private Skin skin;
 	private Sound button;
 	private Music main;
+	private PlayerScreen newPlayerScreen;
 
 	public Menu(final InvadersGame game) {
 		this.game = game;
@@ -41,6 +42,7 @@ public class Menu implements Screen {
 		background = new Texture(Gdx.files.internal(Resources.IMAGE_MAIN));
 		button = Gdx.audio.newSound(Gdx.files.internal(Resources.SOUND_BUTTON));
 		main = Gdx.audio.newMusic(Gdx.files.internal(Resources.MUSIC_MAIN));
+		newPlayerScreen = new PlayerScreen(game);
 	}
 
 	@Override
@@ -161,7 +163,6 @@ public class Menu implements Screen {
 			@Override
 			public void changed(ChangeEvent arg0, Actor arg1) {
 				button.play();
-				PlayerScreen newPlayerScreen = new PlayerScreen(game);
 				game.setScreen(newPlayerScreen);
 				disableButtons();
 			}
