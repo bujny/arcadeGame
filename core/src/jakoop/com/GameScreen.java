@@ -1,5 +1,6 @@
 package jakoop.com;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Map;
@@ -11,7 +12,10 @@ import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
+import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator.FreeTypeFontParameter;
 
 public class GameScreen implements Screen {
 
@@ -37,6 +41,10 @@ public class GameScreen implements Screen {
 	private Texture gameOver;
 	private Texture youWin;
 	private Texture pressKey;
+	private int score=0;
+	private float combo=1.0f;
+	private BitmapFont scoreFont;
+	DecimalFormat df;
 
 	public GameScreen(final InvadersGame game) {
 		this.isGameOver = false;
@@ -58,6 +66,14 @@ public class GameScreen implements Screen {
 		gameOver = new Texture(Gdx.files.internal(Resources.IMAGE_GAME_OVER));
 		youWin = new Texture(Gdx.files.internal(Resources.IMAGE_YOU_WIN));
 		pressKey = new Texture(Gdx.files.internal(Resources.IMAGE_PRESS_KEY));
+		
+		//Print score y combo:
+		FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal(Resources.FONT_BRODWAY));
+		FreeTypeFontParameter parameter = new FreeTypeFontParameter();
+		parameter.size = 36;
+		scoreFont = generator.generateFont(parameter); 
+		generator.dispose();
+		df = new DecimalFormat("#.00");
 	}
 
 	private void chooseSettings() {
@@ -101,6 +117,7 @@ public class GameScreen implements Screen {
 			if (Gdx.input.isKeyPressed(Keys.ANY_KEY)) {
 				this.dispose();
 				game.setScreen(InvadersGame.getMainMenuScreen());
+				// HERE WE HAVE TO RETURN SCORE VARIABLE TO SOME HIGH SCORE SCENE / SCORE SHOW CLASS
 			}
 		} else {
 			spriteBatch.draw(stageBackground, 0, 0);
@@ -108,6 +125,7 @@ public class GameScreen implements Screen {
 			enemies.drawEnemies(spriteBatch);
 			checkConflicts();
 			playerEnemyConflict();
+			scoreFont.draw(spriteBatch, "Score: "+ Integer.toString(score)+" (x"+df.format(combo)+")", 25, 55);
 		}
 		spriteBatch.end();
 	}
@@ -127,11 +145,15 @@ public class GameScreen implements Screen {
 				case 1:
 					iteratorCoin.remove();
 					player.menosLife();
+					combo=1.0f;
 					loseLife = Gdx.audio.newSound(Gdx.files.internal(Resources.SOUND_LOOSE_LIFE));
 					loseLife.play();
 					isGameOver = player.isGameOver();
 					break;
 				case 2:
+					Enemy enemy = entry.getKey(); 
+					score += enemy.getValue() * combo * 10; 
+ 					combo += 0.05;
 					iteratorCoin.remove();
 					iteratorEnemy.remove();
 					drinkHit = Gdx.audio.newSound(Gdx.files.internal(Resources.SOUND_DRINK));
