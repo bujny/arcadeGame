@@ -99,9 +99,8 @@ public class GameScreen implements Screen {
 				spriteBatch.draw(youWin, 340, 220, 600, 300);
 			}
 			if (Gdx.input.isKeyPressed(Keys.ANY_KEY)) {
-				Resources.RELOAD = true;
 				this.dispose();
-				game.setScreen(new Menu(game));
+				game.setScreen(InvadersGame.getMainMenuScreen());
 			}
 		} else {
 			spriteBatch.draw(stageBackground, 0, 0);

@@ -20,14 +20,13 @@ import com.badlogic.gdx.utils.viewport.ScreenViewport;
 public class PlayerScreen implements Screen {
 	private final InvadersGame game;
 	private final SpriteBatch spriteBatch;
-	private Stage stage;
+	private Stage playerStage;
 	private OrthographicCamera camera;
 	private Texture background;
 	private Skin skin;
 	private Sound button;
 	private TextButton okB;
 	private TextButton newPlayerB;
-
 	
 	public PlayerScreen(final InvadersGame game) {
 		this.game = game;
@@ -40,10 +39,10 @@ public class PlayerScreen implements Screen {
 	
 	@Override
 	public void show() {
-		stage = new Stage(new ScreenViewport());
+		playerStage = new Stage(new ScreenViewport());
 		createButton(980, 29, 0);
 		createButton(30, 29, 1);
-		Gdx.input.setInputProcessor(stage);
+		Gdx.input.setInputProcessor(playerStage);
 		
 	}
 	
@@ -65,11 +64,11 @@ public class PlayerScreen implements Screen {
 		switch (id) {
 		case 0:
 			createOkB(x, y, skin);
-			stage.addActor(okB);
+			playerStage.addActor(okB);
 			break;
 		case 1:
 			createNewPlayerB(x, y, skin);
-			stage.addActor(newPlayerB);
+			playerStage.addActor(newPlayerB);
 			break;
 		default:
 			break;
@@ -84,7 +83,7 @@ public class PlayerScreen implements Screen {
 		spriteBatch.begin();
 		spriteBatch.draw(background, 0, 0);
 		spriteBatch.end();
-		stage.draw();
+		playerStage.draw();
 		
 	}
 
@@ -99,8 +98,8 @@ public class PlayerScreen implements Screen {
 			@Override
 			public void changed(ChangeEvent arg0, Actor arg1) {
 				button.play();
-				stage.dispose();
-				game.setScreen(new Menu(game));
+				playerStage.dispose();
+				game.setScreen(InvadersGame.getMainMenuScreen());
 				disableButtons();
 			}
 		});

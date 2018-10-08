@@ -24,7 +24,7 @@ public class Menu implements Screen {
 	private final SpriteBatch spriteBatch;
 	private OrthographicCamera camera;
 	private Texture background;
-	private Stage stage;
+	private Stage mainStage;
 	private TextButton startB;
 	private TextButton exitB;
 	private TextButton playerB;
@@ -41,11 +41,6 @@ public class Menu implements Screen {
 		background = new Texture(Gdx.files.internal(Resources.IMAGE_MAIN));
 		button = Gdx.audio.newSound(Gdx.files.internal(Resources.SOUND_BUTTON));
 		main = Gdx.audio.newMusic(Gdx.files.internal(Resources.MUSIC_MAIN));
-		if (Resources.RELOAD) {
-			Resources.RELOAD = false;
-			main.play();
-			main.setVolume(0.6f);
-		}	
 	}
 
 	@Override
@@ -73,7 +68,7 @@ public class Menu implements Screen {
 		spriteBatch.begin();
 		spriteBatch.draw(background, 0, 0);
 		spriteBatch.end();
-		stage.draw();
+		mainStage.draw();
 	}
 
 	@Override
@@ -90,12 +85,15 @@ public class Menu implements Screen {
 
 	@Override
 	public void show() {
-		stage = new Stage(new ScreenViewport());
+		mainStage = new Stage(new ScreenViewport());
 		createButton(505, 288, 0);
 		createButton(30, 30, 1);
 		createButton(505, 203, 2);
 
-		Gdx.input.setInputProcessor(stage);
+		Gdx.input.setInputProcessor(mainStage);
+		main.play();
+		main.play();
+		main.setVolume(0.6f);
 	}
 
 	public void createButton(int x, int y, int id) {
@@ -116,15 +114,15 @@ public class Menu implements Screen {
 		switch (id) {
 		case 0:
 			createStartB(x, y, skin);
-			stage.addActor(startB);
+			mainStage.addActor(startB);
 			break;
 		case 1:
 			createExitB(x, y, skin);
-			stage.addActor(exitB);
+			mainStage.addActor(exitB);
 			break;
 		case 2:
 			createPlayerB(x, y, skin);
-			stage.addActor(playerB);
+			mainStage.addActor(playerB);
 			break;
 		default:
 			break;
@@ -142,6 +140,7 @@ public class Menu implements Screen {
 			@Override
 			public void changed(ChangeEvent arg0, Actor arg1) {				
 				button.play();
+				
 				main.stop();
 				GameScreen gameScreen = new GameScreen(game);
 				game.setScreen(gameScreen);
@@ -182,7 +181,7 @@ public class Menu implements Screen {
 			public void changed(ChangeEvent arg0, Actor arg1) {
 				button.play();
 				main.stop();
-				stage.dispose();
+				mainStage.dispose();
 				game.dispose();
 			}
 

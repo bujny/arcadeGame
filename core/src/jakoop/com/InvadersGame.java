@@ -7,7 +7,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 public class InvadersGame extends Game {
 	public SpriteBatch spriteBatch;
     //public BitmapFont font;
-	public Menu mainMenuScreen;
+	public static Menu mainMenuScreen;
 	
     @Override
     public void create() {
@@ -26,4 +26,8 @@ public class InvadersGame extends Game {
         mainMenuScreen.dispose();
     	Gdx.app.exit();
     }
+    
+	public static Menu getMainMenuScreen() {
+		return mainMenuScreen;
+	}
 }

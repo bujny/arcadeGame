@@ -7,7 +7,6 @@ public final class Resources {
     public static final int FIVE_EURO = 3; 
     public static final int COLUMNS = 5;
     public static final float SPEED_LVL = 20.0f;
-    public static boolean RELOAD = true;
     
     /** MUSIC */
     public static final String MUSIC_MAIN = "sound\\main.mp3";
