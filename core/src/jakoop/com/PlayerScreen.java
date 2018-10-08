@@ -26,6 +26,7 @@ public class PlayerScreen implements Screen {
 	private Texture rbSelected;
 	private Skin skin;
 	private Sound button;
+	
 	private TextButton okB;
 	private TextButton newPlayerB;
 	private TextButton player1B;
@@ -52,6 +53,11 @@ public class PlayerScreen implements Screen {
 	@Override
 	public void show() {
 		playerStage = new Stage(new ScreenViewport());
+		showButtons();
+		Gdx.input.setInputProcessor(playerStage);
+	}
+	
+	public void showButtons() {
 		createButton(980, 29, 0);
 		createButton(30, 29, 1);
 		createButton(165, 403, 2);
@@ -60,7 +66,6 @@ public class PlayerScreen implements Screen {
 		createButton(723, 403, 5);
 		createButton(723, 285, 6);
 		createButton(723, 170, 7);
-		Gdx.input.setInputProcessor(playerStage);
 	}
 	
 	public void createButton(int x, int y, int id) {
@@ -114,18 +119,6 @@ public class PlayerScreen implements Screen {
 		default:
 			break;
 		}
-	}
-
-	@Override
-	public void render(float delta) {
-		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-		camera.update();
-		spriteBatch.setProjectionMatrix(camera.combined);
-		spriteBatch.begin();
-		spriteBatch.draw(background, 0, 0);
-		spriteBatch.draw(rbSelected, rbXpos, rbYpos, 44, 44);
-		spriteBatch.end();
-		playerStage.draw();	
 	}
 
 	public void createOkB(int x, int y, Skin skin) {
@@ -274,6 +267,18 @@ public class PlayerScreen implements Screen {
 			}
 		});
 	}
+
+	@Override
+	public void render(float delta) {
+		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+		camera.update();
+		spriteBatch.setProjectionMatrix(camera.combined);
+		spriteBatch.begin();
+		spriteBatch.draw(background, 0, 0);
+		spriteBatch.draw(rbSelected, rbXpos, rbYpos, 44, 44);
+		spriteBatch.end();
+		playerStage.draw();	
+	}
 	
 	@Override
 	public void resize(int width, int height) {
@@ -304,4 +309,11 @@ public class PlayerScreen implements Screen {
 		// TODO Auto-generated method stub
 	}
 
+	public void readPlayersFile() {
+		
+	}
+	
+	public void writePlayersFile() {
+		
+	}
 }
