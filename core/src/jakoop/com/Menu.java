@@ -41,8 +41,11 @@ public class Menu implements Screen {
 		background = new Texture(Gdx.files.internal(Resources.IMAGE_MAIN));
 		button = Gdx.audio.newSound(Gdx.files.internal(Resources.SOUND_BUTTON));
 		main = Gdx.audio.newMusic(Gdx.files.internal(Resources.MUSIC_MAIN));
-		main.play();
-		main.setVolume(0.6f);
+		if (Resources.RELOAD) {
+			Resources.RELOAD = false;
+			main.play();
+			main.setVolume(0.6f);
+		}	
 	}
 
 	@Override
@@ -177,7 +180,6 @@ public class Menu implements Screen {
 
 			@Override
 			public void changed(ChangeEvent arg0, Actor arg1) {
-				button = Gdx.audio.newSound(Gdx.files.internal(Resources.SOUND_BUTTON));
 				button.play();
 				main.stop();
 				stage.dispose();
