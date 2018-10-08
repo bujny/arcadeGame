@@ -28,10 +28,12 @@ public class Menu implements Screen {
 	private TextButton startB;
 	private TextButton exitB;
 	private TextButton playerB;
+	private TextButton hallOfFameB;
 	private Skin skin;
 	private Sound button;
 	private Music main;
 	private PlayerScreen newPlayerScreen;
+	private HallOfFameScreen hallOfFameScreen;
 
 	public Menu(final InvadersGame game) {
 		this.game = game;
@@ -90,7 +92,8 @@ public class Menu implements Screen {
 		mainStage = new Stage(new ScreenViewport());
 		createButton(505, 288, 0);
 		createButton(30, 30, 1);
-		createButton(505, 203, 2);
+		createButton(505, 370, 2);
+		createButton(505, 203, 3);
 
 		Gdx.input.setInputProcessor(mainStage);
 		main.play();
@@ -126,6 +129,10 @@ public class Menu implements Screen {
 			createPlayerB(x, y, skin);
 			mainStage.addActor(playerB);
 			break;
+		case 3:
+			createHallOfFameB(x, y, skin);
+			mainStage.addActor(hallOfFameB);
+			break;
 		default:
 			break;
 		}
@@ -142,7 +149,6 @@ public class Menu implements Screen {
 			@Override
 			public void changed(ChangeEvent arg0, Actor arg1) {				
 				button.play();
-				
 				main.stop();
 				GameScreen gameScreen = new GameScreen(game);
 				game.setScreen(gameScreen);
@@ -157,6 +163,7 @@ public class Menu implements Screen {
 		playerB.setX(x);
 		playerB.setY(y);
 		playerB.setWidth(270);
+		playerB.setHeight(30);
 		playerB.setVisible(true);
 		playerB.addListener(new ChangeListener() {
 
@@ -165,6 +172,24 @@ public class Menu implements Screen {
 				button.play();
 				game.setScreen(newPlayerScreen);
 				disableButtons();
+			}
+
+		});
+	}
+	
+	public void createHallOfFameB(int x, int y, Skin skin) {
+		hallOfFameB = new TextButton("", skin);
+		hallOfFameB.setX(x);
+		hallOfFameB.setY(y);
+		hallOfFameB.setWidth(270);
+		hallOfFameB.setVisible(true);
+		hallOfFameB.addListener(new ChangeListener() {
+
+			@Override
+			public void changed(ChangeEvent arg0, Actor arg1) {
+				button.play();
+				//game.setScreen(hallOfFameScreen);
+				//disableButtons();
 			}
 
 		});
@@ -192,6 +217,7 @@ public class Menu implements Screen {
 	private void disableButtons() {
 		startB.setDisabled(true);
 		playerB.setDisabled(true);
+		hallOfFameB.setDisabled(true);
 		exitB.setDisabled(true);
 	}
 
