@@ -1,5 +1,7 @@
 package jakoop.com;
 
+import java.util.ArrayList;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.audio.Music;
@@ -38,6 +40,8 @@ public class Menu implements Screen {
 	private HallOfFameScreen hallOfFameScreen;
 	private HowToPlayScreen howToPayScreen;
 	private CreditsScreen creditsScreen;
+	public ArrayList<String> arrayPlayers;
+	public int currentPlayer;
 
 	public Menu(final InvadersGame game) {
 		this.game = game;
@@ -275,4 +279,8 @@ public class Menu implements Screen {
 		creditsB.setDisabled(true);
 	}
 
+	private void cargarListaUsuarios() {
+		arrayPlayers = new ArrayList<String>();
+	}
+	
 }

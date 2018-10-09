@@ -56,4 +56,8 @@ public final class Resources {
 	 
 	/** FONTS */
 	 public static final String FONT_BRODWAY = "fonts\\broadway.ttf";
+	 
+	 /** DATA FILES */
+	 public static final String DATA_USERS = "data\\users.dat";
+	 public static final String DATA_SCORES = "data\\scores.dat";
 }
