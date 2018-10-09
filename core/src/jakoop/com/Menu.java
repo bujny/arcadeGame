@@ -35,17 +35,18 @@ public class Menu implements Screen {
 	private Music main;
 	private PlayerScreen newPlayerScreen;
 	private HallOfFameScreen hallOfFameScreen;
+	private HowToPlay howToPayScreen;
 
 	public Menu(final InvadersGame game) {
 		this.game = game;
 		this.spriteBatch = game.spriteBatch;
 		camera = new OrthographicCamera();
 		camera.setToOrtho(false, 1280, 720);
-		// viewport = new StretchViewport(1280, 720, camera)
 		background = new Texture(Gdx.files.internal(Resources.IMAGE_MAIN));
 		button = Gdx.audio.newSound(Gdx.files.internal(Resources.SOUND_BUTTON));
 		main = Gdx.audio.newMusic(Gdx.files.internal(Resources.MUSIC_MAIN));
-		//newPlayerScreen = new PlayerScreen(game);
+		newPlayerScreen = new PlayerScreen(game);
+		howToPayScreen = new HowToPlay(game);
 	}
 
 	@Override
@@ -231,8 +232,6 @@ public class Menu implements Screen {
 			@Override
 			public void changed(ChangeEvent arg0, Actor arg1) {				
 				button.play();
-				main.stop();
-				HowToPlay howToPayScreen = new HowToPlay(game);
 				game.setScreen(howToPayScreen);
 				disableButtons();
 			}

@@ -2,6 +2,7 @@ package jakoop.com;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
@@ -14,7 +15,6 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
-import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener.ChangeEvent;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 
 public class HowToPlay implements Screen{
@@ -26,6 +26,7 @@ public class HowToPlay implements Screen{
 	private TextButton createOkB;
 	private Stage howToPlayStage;
 	private Skin skin;
+	private Sound button;
 
 	public HowToPlay(final InvadersGame game) {
 		this.game = game;
@@ -33,7 +34,7 @@ public class HowToPlay implements Screen{
 		camera = new OrthographicCamera();
 		camera.setToOrtho(false, 1280, 720);
 		background = new Texture(Gdx.files.internal(Resources.IMAGE_HOW_TO_PLAY));
-
+		button = Gdx.audio.newSound(Gdx.files.internal(Resources.SOUND_BUTTON));
 	}
 	@Override
 	public void dispose() {
@@ -113,10 +114,10 @@ public class HowToPlay implements Screen{
 		createOkB.addListener(new ChangeListener() {
 
 			@Override
-			public void changed(ChangeEvent arg0, Actor arg1) {				
-				
-				Menu mainScreen = new Menu(game);
-				game.setScreen(mainScreen);
+			public void changed(ChangeEvent arg0, Actor arg1) {	
+				button.play();
+				game.setScreen(InvadersGame.getMainMenuScreen());
+				createOkB.setDisabled(true);
 			}
 
 		});
