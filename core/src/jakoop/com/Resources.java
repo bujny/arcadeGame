@@ -49,6 +49,14 @@ public final class Resources {
 	public static final String SKIN_USER5 = "image\\skinP5.png";
 	public static final String SKIN_USER6 = "image\\skinP6.png";
 	
+	/** USER NAMES */
+	public static final String NAME_USER1 = "user1";
+	public static final String NAME_USER2 = "user2";
+	public static final String NAME_USER3 = "user3";
+	public static final String NAME_USER4 = "user4";
+	public static final String NAME_USER5 = "user5";
+	public static final String NAME_USER6 = "user6";
+	
     /** GENERAL IMAGES */
 	public static final String IMAGE_PRESS_KEY = "image\\pressAnyKey.png";
 	public static final String IMAGE_YOU_WIN= "image\\youWin.png";

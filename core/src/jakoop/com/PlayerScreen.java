@@ -1,5 +1,7 @@
 package jakoop.com;
 
+import java.util.ArrayList;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.audio.Sound;
@@ -10,6 +12,8 @@ import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
+import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator.FreeTypeFontParameter;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
@@ -36,6 +40,7 @@ public class PlayerScreen implements Screen {
 	private TextButton player6B;
 	private static float rbXpos;
 	private static float rbYpos;
+	private BitmapFont userFont;
 	
 	public PlayerScreen(final InvadersGame game) {
 		this.game = game;
@@ -47,6 +52,15 @@ public class PlayerScreen implements Screen {
 		rbSelected = new Texture(Gdx.files.internal(Resources.IMAGE_RB_SELECTED));
 		rbXpos = 174;
 		rbYpos = 409;
+		printUserNames();
+	}
+	
+	private void printUserNames() {
+		FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal(Resources.FONT_BRODWAY));
+		FreeTypeFontParameter parameter = new FreeTypeFontParameter();
+		parameter.size = 50;
+		userFont = generator.generateFont(parameter); 
+		generator.dispose();
 	}
 	
 	@Override
@@ -156,6 +170,8 @@ public class PlayerScreen implements Screen {
 				button.play();
 				rbXpos = 174;
 				rbYpos = 409;
+				ArrayList<User> arrayUsers = InvadersGame.getMainMenuScreen().getArrayUsers();
+				InvadersGame.getMainMenuScreen().setCurrentUser(arrayUsers.get(0));
 			}
 		});
 	}
@@ -173,6 +189,8 @@ public class PlayerScreen implements Screen {
 				button.play();
 				rbXpos = 174;
 				rbYpos = 292;
+				ArrayList<User> arrayUsers = InvadersGame.getMainMenuScreen().getArrayUsers();
+				InvadersGame.getMainMenuScreen().setCurrentUser(arrayUsers.get(1));
 			}
 		});
 	}
@@ -190,6 +208,8 @@ public class PlayerScreen implements Screen {
 				button.play();
 				rbXpos = 174;
 				rbYpos = 176;
+				ArrayList<User> arrayUsers = InvadersGame.getMainMenuScreen().getArrayUsers();
+				InvadersGame.getMainMenuScreen().setCurrentUser(arrayUsers.get(2));
 			}
 		});
 	}
@@ -207,6 +227,8 @@ public class PlayerScreen implements Screen {
 				button.play();
 				rbXpos = 731;
 				rbYpos = 408;
+				ArrayList<User> arrayUsers = InvadersGame.getMainMenuScreen().getArrayUsers();
+				InvadersGame.getMainMenuScreen().setCurrentUser(arrayUsers.get(3));
 			}
 		});
 	}
@@ -224,6 +246,8 @@ public class PlayerScreen implements Screen {
 				button.play();
 				rbXpos = 731;
 				rbYpos = 292;
+				ArrayList<User> arrayUsers = InvadersGame.getMainMenuScreen().getArrayUsers();
+				InvadersGame.getMainMenuScreen().setCurrentUser(arrayUsers.get(4));
 			}
 		});
 	}
@@ -241,6 +265,8 @@ public class PlayerScreen implements Screen {
 				button.play();
 				rbXpos = 731;
 				rbYpos = 176;
+				ArrayList<User> arrayUsers = InvadersGame.getMainMenuScreen().getArrayUsers();
+				InvadersGame.getMainMenuScreen().setCurrentUser(arrayUsers.get(5));
 			}
 		});
 	}
@@ -253,6 +279,12 @@ public class PlayerScreen implements Screen {
 		spriteBatch.begin();
 		spriteBatch.draw(background, 0, 0);
 		spriteBatch.draw(rbSelected, rbXpos, rbYpos, 44, 44);
+		userFont.draw(spriteBatch, InvadersGame.getMainMenuScreen().getArrayUsers().get(0).getName(), 280, 450);
+		userFont.draw(spriteBatch, InvadersGame.getMainMenuScreen().getArrayUsers().get(1).getName(), 280, 332);
+		userFont.draw(spriteBatch, InvadersGame.getMainMenuScreen().getArrayUsers().get(2).getName(), 280, 219);
+		userFont.draw(spriteBatch, InvadersGame.getMainMenuScreen().getArrayUsers().get(3).getName(), 835, 450);
+		userFont.draw(spriteBatch, InvadersGame.getMainMenuScreen().getArrayUsers().get(4).getName(), 835, 332);
+		userFont.draw(spriteBatch, InvadersGame.getMainMenuScreen().getArrayUsers().get(5).getName(), 835, 219);
 		spriteBatch.end();
 		playerStage.draw();	
 	}

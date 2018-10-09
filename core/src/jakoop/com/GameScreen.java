@@ -66,8 +66,10 @@ public class GameScreen implements Screen {
 		gameOver = new Texture(Gdx.files.internal(Resources.IMAGE_GAME_OVER));
 		youWin = new Texture(Gdx.files.internal(Resources.IMAGE_YOU_WIN));
 		pressKey = new Texture(Gdx.files.internal(Resources.IMAGE_PRESS_KEY));
-		
-		//Print score y combo:
+		printScore();
+	}
+	
+	private void printScore() {
 		FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal(Resources.FONT_BRODWAY));
 		FreeTypeFontParameter parameter = new FreeTypeFontParameter();
 		parameter.size = 36;

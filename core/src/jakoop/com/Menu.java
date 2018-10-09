@@ -13,6 +13,8 @@ import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
+import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator.FreeTypeFontParameter;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
@@ -42,6 +44,7 @@ public class Menu implements Screen {
 	private CreditsScreen creditsScreen;
 	private ArrayList<User> arrayUsers;
 	private User currentUser;
+	private BitmapFont userFont;
 
 	public Menu(final InvadersGame game) {
 		this.game = game;
@@ -56,19 +59,36 @@ public class Menu implements Screen {
 		hallOfFameScreen = new HallOfFameScreen(game);
 		creditsScreen = new CreditsScreen(game);
 		createUsers();
+		printCurrentUserName();
 	}
 
 	public void createUsers() {
 		arrayUsers = new ArrayList<User>();
-		arrayUsers.add(new User(1, "userName1", Resources.SKIN_USER1));
-		arrayUsers.add(new User(2, "userName2", Resources.SKIN_USER2));
-		arrayUsers.add(new User(3, "userName3", Resources.SKIN_USER3));
-		arrayUsers.add(new User(4, "userName4", Resources.SKIN_USER4));
-		arrayUsers.add(new User(5, "userName5", Resources.SKIN_USER5));
-		arrayUsers.add(new User(6, "userName6", Resources.SKIN_USER6));
+		arrayUsers.add(new User(1, Resources.NAME_USER1, Resources.SKIN_USER1));
+		arrayUsers.add(new User(2, Resources.NAME_USER2, Resources.SKIN_USER2));
+		arrayUsers.add(new User(3, Resources.NAME_USER3, Resources.SKIN_USER3));
+		arrayUsers.add(new User(4, Resources.NAME_USER4, Resources.SKIN_USER4));
+		arrayUsers.add(new User(5, Resources.NAME_USER5, Resources.SKIN_USER5));
+		arrayUsers.add(new User(6, Resources.NAME_USER6, Resources.SKIN_USER6));
 		
 		currentUser = arrayUsers.get(0);
+		
+		// ERASE, IS FOR CHECKING
+		arrayUsers.get(0).setScore(10);
+		arrayUsers.get(1).setScore(60);
+		arrayUsers.get(2).setScore(30);
+		arrayUsers.get(3).setScore(50);
+		arrayUsers.get(4).setScore(40);
+		arrayUsers.get(5).setScore(20);
 	}	
+	
+	private void printCurrentUserName() {
+		FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal(Resources.FONT_BRODWAY));
+		FreeTypeFontParameter parameter = new FreeTypeFontParameter();
+		parameter.size = 30;
+		userFont = generator.generateFont(parameter); 
+		generator.dispose();
+	}
 
 	@Override
 	public void render(float arg0) {
@@ -77,8 +97,10 @@ public class Menu implements Screen {
 		spriteBatch.setProjectionMatrix(camera.combined);
 		spriteBatch.begin();
 		spriteBatch.draw(background, 0, 0);
+		userFont.draw(spriteBatch, "Hello, " + currentUser.getName() + " !", 535, 440);
 		spriteBatch.end();
 		mainStage.draw();
+
 	}
 
 	@Override
