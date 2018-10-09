@@ -1,6 +1,7 @@
 package jakoop.com;
 
-import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
@@ -38,11 +39,11 @@ public class Menu implements Screen {
 	private Skin skin;
 	private Sound button;
 	private Music main;
-	private PlayerScreen newPlayerScreen;
-	private HallOfFameScreen hallOfFameScreen;
-	private HowToPlayScreen howToPayScreen;
-	private CreditsScreen creditsScreen;
-	private ArrayList<User> arrayUsers;
+	private static PlayerScreen newPlayerScreen;
+	private static HallOfFameScreen hallOfFameScreen;
+	private static HowToPlayScreen howToPayScreen;
+	private static CreditsScreen creditsScreen;
+	private Map<Integer, User> mapUsers;
 	private User currentUser;
 	private BitmapFont userFont;
 
@@ -54,32 +55,35 @@ public class Menu implements Screen {
 		background = new Texture(Gdx.files.internal(Resources.IMAGE_MAIN));
 		button = Gdx.audio.newSound(Gdx.files.internal(Resources.SOUND_BUTTON));
 		main = Gdx.audio.newMusic(Gdx.files.internal(Resources.MUSIC_MAIN));
+		
+		createUsers();
+		printCurrentUserName();
+		
 		newPlayerScreen = new PlayerScreen(game);
 		howToPayScreen = new HowToPlayScreen(game);
 		hallOfFameScreen = new HallOfFameScreen(game);
 		creditsScreen = new CreditsScreen(game);
-		createUsers();
-		printCurrentUserName();
 	}
 
-	public void createUsers() {
-		arrayUsers = new ArrayList<User>();
-		arrayUsers.add(new User(1, Resources.NAME_USER1, Resources.SKIN_USER1));
-		arrayUsers.add(new User(2, Resources.NAME_USER2, Resources.SKIN_USER2));
-		arrayUsers.add(new User(3, Resources.NAME_USER3, Resources.SKIN_USER3));
-		arrayUsers.add(new User(4, Resources.NAME_USER4, Resources.SKIN_USER4));
-		arrayUsers.add(new User(5, Resources.NAME_USER5, Resources.SKIN_USER5));
-		arrayUsers.add(new User(6, Resources.NAME_USER6, Resources.SKIN_USER6));
+	private void createUsers() {
+		mapUsers = new HashMap<Integer, User>();
 		
-		currentUser = arrayUsers.get(0);
+		mapUsers.put(1, new User(1, Resources.NAME_USER1, Resources.SKIN_USER1));
+		mapUsers.put(2, new User(2, Resources.NAME_USER2, Resources.SKIN_USER2));
+		mapUsers.put(3, new User(3, Resources.NAME_USER3, Resources.SKIN_USER3));
+		mapUsers.put(4, new User(4, Resources.NAME_USER4, Resources.SKIN_USER4));
+		mapUsers.put(5, new User(5, Resources.NAME_USER5, Resources.SKIN_USER5));
+		mapUsers.put(6, new User(6, Resources.NAME_USER6, Resources.SKIN_USER6));
+		
+		currentUser = mapUsers.get(1);
 		
 		// ERASE, IS FOR CHECKING
-		arrayUsers.get(0).setScore(10);
-		arrayUsers.get(1).setScore(60);
-		arrayUsers.get(2).setScore(30);
-		arrayUsers.get(3).setScore(50);
-		arrayUsers.get(4).setScore(40);
-		arrayUsers.get(5).setScore(20);
+		mapUsers.get(1).setScore(10);
+		mapUsers.get(2).setScore(60);
+		mapUsers.get(3).setScore(30);
+		mapUsers.get(4).setScore(50);
+		mapUsers.get(5).setScore(40);
+		mapUsers.get(6).setScore(20);
 	}	
 	
 	private void printCurrentUserName() {
@@ -298,14 +302,6 @@ public class Menu implements Screen {
 	public void setCurrentUser(User currentUser) {
 		this.currentUser = currentUser;
 	}
-	
-	public ArrayList<User> getArrayUsers() {
-		return arrayUsers;
-	}
-
-	public void setArrayUsers(ArrayList<User> arrayUsers) {
-		this.arrayUsers = arrayUsers;
-	}
 
 	@Override
 	public void dispose() {
@@ -329,5 +325,12 @@ public class Menu implements Screen {
 		// TODO Auto-generated method stub
 
 	}
-	
+
+	public Map<Integer, User> getMapUsers() {
+		return mapUsers;
+	}
+
+	public void setMapUsers(Map<Integer, User> mapUsers) {
+		this.mapUsers = mapUsers;
+	}
 }
