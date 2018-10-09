@@ -30,12 +30,14 @@ public class Menu implements Screen {
 	private TextButton playerB;
 	private TextButton hallOfFameB;
 	private TextButton createHowToPlayB;
+	private TextButton createCreditsB;
 	private Skin skin;
 	private Sound button;
 	private Music main;
 	private PlayerScreen newPlayerScreen;
 	private HallOfFameScreen hallOfFameScreen;
 	private HowToPlay howToPayScreen;
+	private CreditsScreen creditsScreen;
 
 	public Menu(final InvadersGame game) {
 		this.game = game;
@@ -47,6 +49,7 @@ public class Menu implements Screen {
 		main = Gdx.audio.newMusic(Gdx.files.internal(Resources.MUSIC_MAIN));
 		newPlayerScreen = new PlayerScreen(game);
 		howToPayScreen = new HowToPlay(game);
+		creditsScreen = new CreditsScreen(game);
 	}
 
 	@Override
@@ -97,6 +100,7 @@ public class Menu implements Screen {
 		createButton(505, 370, 2);
 		createButton(505, 115, 3);
 		createButton(505, 203, 4);
+		createButton(980, 30, 5);
 		
 		Gdx.input.setInputProcessor(mainStage);
 		main.play();
@@ -139,6 +143,10 @@ public class Menu implements Screen {
 		case 4:
 			createHowToPlayB(x, y, skin);
 			mainStage.addActor(createHowToPlayB);
+			break;
+		case 5:
+			createCreditsB(x, y, skin);
+			mainStage.addActor(createCreditsB);
 			break;
 		default:
 			break;
@@ -233,6 +241,24 @@ public class Menu implements Screen {
 			public void changed(ChangeEvent arg0, Actor arg1) {				
 				button.play();
 				game.setScreen(howToPayScreen);
+				disableButtons();
+			}
+
+		});
+	}
+	
+	public void createCreditsB(int x, int y, Skin skin) {
+		createCreditsB = new TextButton("", skin);
+		createCreditsB.setX(x);
+		createCreditsB.setY(y);
+		createCreditsB.setWidth(270);
+		createCreditsB.setVisible(true);
+		createCreditsB.addListener(new ChangeListener() {
+
+			@Override
+			public void changed(ChangeEvent arg0, Actor arg1) {				
+				button.play();
+				game.setScreen(creditsScreen);
 				disableButtons();
 			}
 
