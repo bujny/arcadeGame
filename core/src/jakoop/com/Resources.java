@@ -41,11 +41,18 @@ public final class Resources {
 	public static final String IMAGE_HOW_TO_PLAY = "image\\howToPlay.png";
 	public static final String IMAGE_SELECT_PLAYER = "image\\selectPlayer.png";
 	
+	/** USER SKINS */
+	public static final String SKIN_USER1 = "image\\skinP1.png";
+	public static final String SKIN_USER2 = "image\\skinP2.png";
+	public static final String SKIN_USER3 = "image\\skinP3.png";
+	public static final String SKIN_USER4 = "image\\skinP4.png";
+	public static final String SKIN_USER5 = "image\\skinP5.png";
+	public static final String SKIN_USER6 = "image\\skinP6.png";
+	
     /** GENERAL IMAGES */
 	public static final String IMAGE_PRESS_KEY = "image\\pressAnyKey.png";
 	public static final String IMAGE_YOU_WIN= "image\\youWin.png";
 	public static final String IMAGE_GAME_OVER = "image\\gameOver.png";
-	public static final String IMAGE_TXAPELA = "image\\txapela.png";
 	public static final String IMAGE_HEART = "image\\heart.png";
 	public static final String IMAGE_RB_SELECTED = "image\\rbSelected.png";
 	

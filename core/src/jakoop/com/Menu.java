@@ -40,8 +40,8 @@ public class Menu implements Screen {
 	private HallOfFameScreen hallOfFameScreen;
 	private HowToPlayScreen howToPayScreen;
 	private CreditsScreen creditsScreen;
-	public ArrayList<String> arrayPlayers;
-	public int currentPlayer;
+	private ArrayList<User> arrayUsers;
+	private User currentUser;
 
 	public Menu(final InvadersGame game) {
 		this.game = game;
@@ -55,24 +55,20 @@ public class Menu implements Screen {
 		howToPayScreen = new HowToPlayScreen(game);
 		hallOfFameScreen = new HallOfFameScreen(game);
 		creditsScreen = new CreditsScreen(game);
+		createUsers();
 	}
 
-	@Override
-	public void dispose() {
-
-	}
-
-	@Override
-	public void hide() {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void pause() {
-		// TODO Auto-generated method stub
-
-	}
+	public void createUsers() {
+		arrayUsers = new ArrayList<User>();
+		arrayUsers.add(new User(1, "userName1", Resources.SKIN_USER1));
+		arrayUsers.add(new User(2, "userName2", Resources.SKIN_USER2));
+		arrayUsers.add(new User(3, "userName3", Resources.SKIN_USER3));
+		arrayUsers.add(new User(4, "userName4", Resources.SKIN_USER4));
+		arrayUsers.add(new User(5, "userName5", Resources.SKIN_USER5));
+		arrayUsers.add(new User(6, "userName6", Resources.SKIN_USER6));
+		
+		currentUser = arrayUsers.get(0);
+	}	
 
 	@Override
 	public void render(float arg0) {
@@ -87,12 +83,6 @@ public class Menu implements Screen {
 
 	@Override
 	public void resize(int arg0, int arg1) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void resume() {
 		// TODO Auto-generated method stub
 
 	}
@@ -279,8 +269,43 @@ public class Menu implements Screen {
 		creditsB.setDisabled(true);
 	}
 
-	private void cargarListaUsuarios() {
-		arrayPlayers = new ArrayList<String>();
+	public User getCurrentUser() {
+		return currentUser;
+	}
+
+	public void setCurrentUser(User currentUser) {
+		this.currentUser = currentUser;
+	}
+	
+	public ArrayList<User> getArrayUsers() {
+		return arrayUsers;
+	}
+
+	public void setArrayUsers(ArrayList<User> arrayUsers) {
+		this.arrayUsers = arrayUsers;
+	}
+
+	@Override
+	public void dispose() {
+		// TODO Auto-generated method stub
+	}
+
+	@Override
+	public void hide() {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void pause() {
+		// TODO Auto-generated method stub
+
+	}
+	
+	@Override
+	public void resume() {
+		// TODO Auto-generated method stub
+
 	}
 	
 }

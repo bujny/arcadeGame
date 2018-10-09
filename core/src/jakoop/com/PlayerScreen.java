@@ -28,7 +28,6 @@ public class PlayerScreen implements Screen {
 	private Sound button;
 	
 	private TextButton okB;
-	private TextButton newPlayerB;
 	private TextButton player1B;
 	private TextButton player2B;
 	private TextButton player3B;
@@ -59,13 +58,12 @@ public class PlayerScreen implements Screen {
 	
 	public void showButtons() {
 		createButton(980, 29, 0);
-		createButton(30, 29, 1);
-		createButton(165, 403, 2);
-		createButton(165, 285, 3);
-		createButton(165, 170, 4);
-		createButton(723, 403, 5);
-		createButton(723, 285, 6);
-		createButton(723, 170, 7);
+		createButton(165, 403, 1);
+		createButton(165, 285, 2);
+		createButton(165, 170, 3);
+		createButton(723, 403, 4);
+		createButton(723, 285, 5);
+		createButton(723, 170, 6);
 	}
 	
 	public void createButton(int x, int y, int id) {
@@ -89,30 +87,26 @@ public class PlayerScreen implements Screen {
 			playerStage.addActor(okB);
 			break;
 		case 1:
-			createNewPlayerB(x, y, skin);
-			playerStage.addActor(newPlayerB);
-			break;
-		case 2:
 			createPlayer1B(x, y, skin);
 			playerStage.addActor(player1B);
 			break;
-		case 3:
+		case 2:
 			createPlayer2B(x, y, skin);
 			playerStage.addActor(player2B);
 			break;
-		case 4:
+		case 3:
 			createPlayer3B(x, y, skin);
 			playerStage.addActor(player3B);
 			break;
-		case 5:
+		case 4:
 			createPlayer4B(x, y, skin);
 			playerStage.addActor(player4B);
 			break;
-		case 6:
+		case 5:
 			createPlayer5B(x, y, skin);
 			playerStage.addActor(player5B);
 			break;
-		case 7:
+		case 6:
 			createPlayer6B(x, y, skin);
 			playerStage.addActor(player6B);
 			break;
@@ -141,29 +135,12 @@ public class PlayerScreen implements Screen {
 	
 	private void disableButtons() {
 		okB.setDisabled(true);
-		newPlayerB.setDisabled(true);
 		player1B.setDisabled(true);
 		player2B.setDisabled(true);
 		player3B.setDisabled(true);
 		player4B.setDisabled(true);
 		player5B.setDisabled(true);
 		player6B.setDisabled(true);
-	}
-	
-	public void createNewPlayerB(int x, int y, Skin skin) {
-		newPlayerB = new TextButton("", skin);
-		newPlayerB.setX(x);
-		newPlayerB.setY(y);
-		newPlayerB.setWidth(270);
-		newPlayerB.setVisible(true);
-		newPlayerB.addListener(new ChangeListener() {
-
-			@Override
-			public void changed(ChangeEvent arg0, Actor arg1) {
-				button.play();
-				// ACTION
-			}
-		});
 	}
 
 	public void createPlayer1B(int x, int y, Skin skin) {
@@ -307,13 +284,5 @@ public class PlayerScreen implements Screen {
 	@Override
 	public void dispose() {
 		// TODO Auto-generated method stub
-	}
-
-	public void readPlayersFile() {
-		
-	}
-	
-	public void writePlayersFile() {
-		
 	}
 }

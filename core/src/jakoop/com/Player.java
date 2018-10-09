@@ -32,7 +32,7 @@ public class Player {
 		currentCoin = Resources.ONE_EURO;
 		staticCoin = new Coin(currentCoin, 605, 15);
 		lifes = new Lifes();
-		texture = new Texture(Gdx.files.internal(Resources.IMAGE_TXAPELA));
+		texture = new Texture(Gdx.files.internal(InvadersGame.getMainMenuScreen().getCurrentUser().getSkin()));
 		changeCoin = Gdx.audio.newSound(Gdx.files.internal(Resources.SOUND_CHANGE_COIN));
 		coins = new ArrayList<Coin>();
 	}
