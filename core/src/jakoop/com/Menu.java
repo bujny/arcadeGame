@@ -29,6 +29,7 @@ public class Menu implements Screen {
 	private TextButton exitB;
 	private TextButton playerB;
 	private TextButton hallOfFameB;
+	private TextButton createHowToPlayB;
 	private Skin skin;
 	private Sound button;
 	private Music main;
@@ -44,7 +45,7 @@ public class Menu implements Screen {
 		background = new Texture(Gdx.files.internal(Resources.IMAGE_MAIN));
 		button = Gdx.audio.newSound(Gdx.files.internal(Resources.SOUND_BUTTON));
 		main = Gdx.audio.newMusic(Gdx.files.internal(Resources.MUSIC_MAIN));
-		newPlayerScreen = new PlayerScreen(game);
+		//newPlayerScreen = new PlayerScreen(game);
 	}
 
 	@Override
@@ -93,8 +94,9 @@ public class Menu implements Screen {
 		createButton(505, 288, 0);
 		createButton(30, 30, 1);
 		createButton(505, 370, 2);
-		createButton(505, 203, 3);
-
+		createButton(505, 115, 3);
+		createButton(505, 203, 4);
+		
 		Gdx.input.setInputProcessor(mainStage);
 		main.play();
 		main.play();
@@ -132,6 +134,10 @@ public class Menu implements Screen {
 		case 3:
 			createHallOfFameB(x, y, skin);
 			mainStage.addActor(hallOfFameB);
+			break;
+		case 4:
+			createHowToPlayB(x, y, skin);
+			mainStage.addActor(createHowToPlayB);
 			break;
 		default:
 			break;
@@ -188,8 +194,8 @@ public class Menu implements Screen {
 			@Override
 			public void changed(ChangeEvent arg0, Actor arg1) {
 				button.play();
-				//game.setScreen(hallOfFameScreen);
-				//disableButtons();
+				game.setScreen(hallOfFameScreen);
+				disableButtons();
 			}
 
 		});
@@ -214,11 +220,32 @@ public class Menu implements Screen {
 		});
 	}
 	
+	public void createHowToPlayB(int x, int y, Skin skin) {
+		createHowToPlayB = new TextButton("", skin);
+		createHowToPlayB.setX(x);
+		createHowToPlayB.setY(y);
+		createHowToPlayB.setWidth(270);
+		createHowToPlayB.setVisible(true);
+		createHowToPlayB.addListener(new ChangeListener() {
+
+			@Override
+			public void changed(ChangeEvent arg0, Actor arg1) {				
+				button.play();
+				main.stop();
+				HowToPlay howToPayScreen = new HowToPlay(game);
+				game.setScreen(howToPayScreen);
+				disableButtons();
+			}
+
+		});
+	}
+	
 	private void disableButtons() {
 		startB.setDisabled(true);
 		playerB.setDisabled(true);
 		hallOfFameB.setDisabled(true);
 		exitB.setDisabled(true);
+		createHowToPlayB.setDisabled(true);
 	}
 
 }
