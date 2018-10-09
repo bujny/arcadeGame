@@ -29,13 +29,15 @@ public class Menu implements Screen {
 	private TextButton exitB;
 	private TextButton playerB;
 	private TextButton hallOfFameB;
-	private TextButton createHowToPlayB;
+	private TextButton howToPlayB;
+	private TextButton creditsB;
 	private Skin skin;
 	private Sound button;
 	private Music main;
 	private PlayerScreen newPlayerScreen;
 	private HallOfFameScreen hallOfFameScreen;
 	private HowToPlayScreen howToPayScreen;
+	private CreditsScreen creditsScreen;
 
 	public Menu(final InvadersGame game) {
 		this.game = game;
@@ -48,6 +50,7 @@ public class Menu implements Screen {
 		newPlayerScreen = new PlayerScreen(game);
 		howToPayScreen = new HowToPlayScreen(game);
 		hallOfFameScreen = new HallOfFameScreen(game);
+		creditsScreen = new CreditsScreen(game);
 	}
 
 	@Override
@@ -98,6 +101,7 @@ public class Menu implements Screen {
 		createButton(505, 370, 2);
 		createButton(505, 115, 3);
 		createButton(505, 203, 4);
+		createButton(980, 30, 5);
 		
 		Gdx.input.setInputProcessor(mainStage);
 		main.play();
@@ -139,7 +143,11 @@ public class Menu implements Screen {
 			break;
 		case 4:
 			createHowToPlayB(x, y, skin);
-			mainStage.addActor(createHowToPlayB);
+			mainStage.addActor(howToPlayB);
+			break;
+		case 5:
+			createCreditsB(x, y, skin);
+			mainStage.addActor(creditsB);
 			break;
 		default:
 			break;
@@ -223,12 +231,12 @@ public class Menu implements Screen {
 	}
 	
 	public void createHowToPlayB(int x, int y, Skin skin) {
-		createHowToPlayB = new TextButton("", skin);
-		createHowToPlayB.setX(x);
-		createHowToPlayB.setY(y);
-		createHowToPlayB.setWidth(270);
-		createHowToPlayB.setVisible(true);
-		createHowToPlayB.addListener(new ChangeListener() {
+		howToPlayB = new TextButton("", skin);
+		howToPlayB.setX(x);
+		howToPlayB.setY(y);
+		howToPlayB.setWidth(270);
+		howToPlayB.setVisible(true);
+		howToPlayB.addListener(new ChangeListener() {
 
 			@Override
 			public void changed(ChangeEvent arg0, Actor arg1) {				
@@ -240,12 +248,31 @@ public class Menu implements Screen {
 		});
 	}
 	
+	public void createCreditsB(int x, int y, Skin skin) {
+		creditsB = new TextButton("", skin);
+		creditsB.setX(x);
+		creditsB.setY(y);
+		creditsB.setWidth(270);
+		creditsB.setVisible(true);
+		creditsB.addListener(new ChangeListener() {
+
+			@Override
+			public void changed(ChangeEvent arg0, Actor arg1) {				
+				button.play();
+				game.setScreen(creditsScreen);
+				disableButtons();
+			}
+
+		});
+	}
+	
 	private void disableButtons() {
 		startB.setDisabled(true);
 		playerB.setDisabled(true);
 		hallOfFameB.setDisabled(true);
 		exitB.setDisabled(true);
-		createHowToPlayB.setDisabled(true);
+		howToPlayB.setDisabled(true);
+		creditsB.setDisabled(true);
 	}
 
 }
