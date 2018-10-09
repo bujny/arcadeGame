@@ -35,7 +35,7 @@ public class Menu implements Screen {
 	private Music main;
 	private PlayerScreen newPlayerScreen;
 	private HallOfFameScreen hallOfFameScreen;
-	private HowToPlay howToPayScreen;
+	private HowToPlayScreen howToPayScreen;
 
 	public Menu(final InvadersGame game) {
 		this.game = game;
@@ -46,7 +46,8 @@ public class Menu implements Screen {
 		button = Gdx.audio.newSound(Gdx.files.internal(Resources.SOUND_BUTTON));
 		main = Gdx.audio.newMusic(Gdx.files.internal(Resources.MUSIC_MAIN));
 		newPlayerScreen = new PlayerScreen(game);
-		howToPayScreen = new HowToPlay(game);
+		howToPayScreen = new HowToPlayScreen(game);
+		hallOfFameScreen = new HallOfFameScreen(game);
 	}
 
 	@Override

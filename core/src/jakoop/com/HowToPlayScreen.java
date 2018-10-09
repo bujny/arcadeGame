@@ -17,7 +17,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 
-public class HowToPlay implements Screen{
+public class HowToPlayScreen implements Screen{
 	
 	private final InvadersGame game;
 	private final SpriteBatch spriteBatch;
@@ -28,7 +28,7 @@ public class HowToPlay implements Screen{
 	private Skin skin;
 	private Sound button;
 
-	public HowToPlay(final InvadersGame game) {
+	public HowToPlayScreen(final InvadersGame game) {
 		this.game = game;
 		this.spriteBatch = game.spriteBatch;
 		camera = new OrthographicCamera();
