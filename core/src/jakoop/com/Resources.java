@@ -5,7 +5,7 @@ public final class Resources {
     public static final int ONE_EURO = 1; 
     public static final int TWO_EURO = 2;
     public static final int FIVE_EURO = 3; 
-    public static final int COLUMNS = 5;
+    public static final int COLUMNS = 6;
     public static final float SPEED_LVL = 20.0f;
     
     /** MUSIC */

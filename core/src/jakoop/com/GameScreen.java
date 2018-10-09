@@ -78,7 +78,7 @@ public class GameScreen implements Screen {
 
 	private void chooseSettings() {
 		enemiesDimension = new int[2];
-		enemiesDimension[0] = 6 * difficulty; // rows
+		enemiesDimension[0] = 14 * difficulty; // rows
 		enemiesDimension[1] = Resources.COLUMNS; // columns
 		speed = Resources.SPEED_LVL;
 	}

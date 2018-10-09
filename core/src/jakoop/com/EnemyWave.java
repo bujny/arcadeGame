@@ -26,7 +26,7 @@ public class EnemyWave {
 		for(int rows=0; rows<enemiesDimension[0]; rows++) {
 			for(int columns=0; columns<enemiesDimension[1]; columns++) {
 				enemyNum = rand.nextInt(3)+1;
-				enemy = new Enemy(enemyNum,128+256*columns,(720+90*rows)); 
+				enemy = new Enemy(enemyNum,(1280/12)+(1280/6)*columns,(720+90*rows)); 
 				enemies.put(enemy, rows);
 			}
 		}
