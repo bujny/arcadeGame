@@ -32,6 +32,7 @@ public class HallOfFameScreen implements Screen {
 	private TextButton okB;
 	private TextButton resetScoresB;
 	private BitmapFont userFont;
+	private BitmapFont winnerFont;
 	private ArrayList<User> userList;
 
 	
@@ -50,6 +51,8 @@ public class HallOfFameScreen implements Screen {
 		FreeTypeFontParameter parameter = new FreeTypeFontParameter();
 		parameter.size = 40;
 		userFont = generator.generateFont(parameter); 
+		parameter.color = Color.RED;
+		winnerFont= generator.generateFont(parameter); 
 		generator.dispose();
 	}
 
@@ -141,11 +144,16 @@ public class HallOfFameScreen implements Screen {
 		spriteBatch.setProjectionMatrix(camera.combined);
 		spriteBatch.begin();
 		spriteBatch.draw(background, 0, 0);
-		userFont.draw(spriteBatch, "" + userList.get(0).getName() + "                    " + userList.get(0).getScore(), 493, 418);
-		userFont.draw(spriteBatch, "" + userList.get(1).getName() + "                    " + userList.get(1).getScore(), 493, 358);
-		userFont.draw(spriteBatch, "" + userList.get(2).getName() + "                    " + userList.get(2).getScore(), 493, 298);
-		userFont.draw(spriteBatch, "" + userList.get(3).getName() + "                    " + userList.get(3).getScore(), 493, 238);
-		userFont.draw(spriteBatch, "" + userList.get(4).getName() + "                    " + userList.get(4).getScore(), 493, 178);
+		winnerFont.draw(spriteBatch, "" + userList.get(0).getName(), 440, 418);
+		userFont.draw(spriteBatch, "" + userList.get(1).getName(), 440, 358);
+		userFont.draw(spriteBatch, "" + userList.get(2).getName(), 440, 298);
+		userFont.draw(spriteBatch, "" + userList.get(3).getName(), 440, 238);
+		userFont.draw(spriteBatch, "" + userList.get(4).getName(), 440, 178);
+		winnerFont.draw(spriteBatch, "" + userList.get(0).getScore(), 800, 418);
+		userFont.draw(spriteBatch, "" + userList.get(1).getScore(), 800, 358);
+		userFont.draw(spriteBatch, "" + userList.get(2).getScore(), 800, 298);
+		userFont.draw(spriteBatch, "" + userList.get(3).getScore(), 800, 238);
+		userFont.draw(spriteBatch, "" + userList.get(4).getScore(), 800, 178);
 		spriteBatch.end();
 		hallOfFameStage.draw();
 	}
