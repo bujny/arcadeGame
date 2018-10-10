@@ -2,6 +2,7 @@ package jakoop.com;
 
 import java.util.ArrayList;
 import java.util.Collections;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.audio.Sound;
@@ -66,8 +67,8 @@ public class HallOfFameScreen implements Screen {
 	}
 
 	private void createScoresArray() {
-		userList = new ArrayList<User>(InvadersGame.getMainMenuScreen().getMapUsers().values());
-		Collections.sort(userList, (user1, user2) -> user1.getScore()- user2.getScore());
+		userList = new ArrayList<User>(InvadersGame.getMainMenuScreen().getMapUsers().values());	
+		Collections.sort(userList, (user1, user2) -> user2.getScore() - user1.getScore());		
 	}
 
 	public void createButton(int x, int y, int id) {

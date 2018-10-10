@@ -117,9 +117,9 @@ public class GameScreen implements Screen {
 				spriteBatch.draw(youWin, 340, 220, 600, 300);
 			}
 			if (Gdx.input.isKeyPressed(Keys.ANY_KEY)) {
+				recordScore();
 				this.dispose();
 				game.setScreen(InvadersGame.getMainMenuScreen());
-				// HERE WE HAVE TO RETURN SCORE VARIABLE TO SOME HIGH SCORE SCENE / SCORE SHOW CLASS
 			}
 		} else {
 			spriteBatch.draw(stageBackground, 0, 0);
@@ -132,6 +132,12 @@ public class GameScreen implements Screen {
 		spriteBatch.end();
 	}
 
+	private void recordScore() {
+		User user = InvadersGame.getMainMenuScreen().getCurrentUser();
+		user.setScore(score);
+		InvadersGame.getMainMenuScreen().getMapUsers().put(user.getId(), user);
+	}
+	
 	private void checkConflicts() {
 		ArrayList<Coin> coins = player.getCoins();
 
