@@ -67,7 +67,8 @@ public class Menu implements Screen {
 		newPlayerScreen = new PlayerScreen(game);
 		howToPayScreen = new HowToPlayScreen(game);
 		hallOfFameScreen = new HallOfFameScreen(game);
-		creditsScreen = new CreditsScreen(game);	}
+		creditsScreen = new CreditsScreen(game);
+	}
 
 	private void createUsers() {
 		mapUsers = new HashMap<Integer, User>();
@@ -80,6 +81,7 @@ public class Menu implements Screen {
 		mapUsers.put(6, new User(6, Resources.NAME_USER6, Resources.SKIN_USER6));
 		
 		currentUser = mapUsers.get(1);
+	}
 	
 	public void loadCurrentUser() {
 		Integer currentID = null;
@@ -87,28 +89,28 @@ public class Menu implements Screen {
 		BufferedReader reader = null;
 
 		try {
-		    reader = new BufferedReader(new FileReader(file));
-		    String text = null;
+			reader = new BufferedReader(new FileReader(file));
+			String text = null;
 
-		    if ((text = reader.readLine()) != null) {
-		        currentID = (Integer.parseInt(text));
-		        currentUser = mapUsers.get(currentID);
-		    }
+			if ((text = reader.readLine()) != null) {
+				currentID = (Integer.parseInt(text));
+				currentUser = mapUsers.get(currentID);
+			}
 		} catch (FileNotFoundException e) {
-		    e.printStackTrace();
+			e.printStackTrace();
 		} catch (IOException e) {
-		    e.printStackTrace();
+			e.printStackTrace();
 		} finally {
-		    try {
-		        if (reader != null) {
-		            reader.close();
-		        }
-		    } catch (IOException e) {
-		    	e.printStackTrace();
-		    }
+			try {
+				if (reader != null) {
+					reader.close();
+				}
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 		}
 	}
-	
+
 	private void storePlayer() {
 		Writer file = null;
 		try {
@@ -116,8 +118,8 @@ public class Menu implements Screen {
 			file.write(new Integer(currentUser.getId()).toString());
 		} catch (IOException e) {
 			e.printStackTrace();
-		}finally {
-			if(file!=null) {
+		} finally {
+			if (file != null) {
 				try {
 					file.close();
 				} catch (IOException e) {
@@ -126,12 +128,12 @@ public class Menu implements Screen {
 			}
 		}
 	}
-	
+
 	private void printCurrentUserName() {
 		FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal(Resources.FONT_BRODWAY));
 		FreeTypeFontParameter parameter = new FreeTypeFontParameter();
 		parameter.size = 30;
-		userFont = generator.generateFont(parameter); 
+		userFont = generator.generateFont(parameter);
 		generator.dispose();
 	}
 
@@ -163,7 +165,7 @@ public class Menu implements Screen {
 		createButton(505, 115, 3);
 		createButton(505, 203, 4);
 		createButton(980, 30, 5);
-		
+
 		Gdx.input.setInputProcessor(mainStage);
 		main.play();
 		main.play();
@@ -174,7 +176,7 @@ public class Menu implements Screen {
 		skin = new Skin();
 		Pixmap pixmap = new Pixmap(1, 1, Pixmap.Format.RGBA8888);
 		pixmap.setColor(Color.WHITE);
-		//pixmap.fill();
+		// pixmap.fill();
 		skin.add("white", new Texture(pixmap));
 		BitmapFont f = new BitmapFont();
 		f.getData().setScale(3);
@@ -224,7 +226,7 @@ public class Menu implements Screen {
 		startB.addListener(new ChangeListener() {
 
 			@Override
-			public void changed(ChangeEvent arg0, Actor arg1) {				
+			public void changed(ChangeEvent arg0, Actor arg1) {
 				button.play();
 				main.stop();
 				GameScreen gameScreen = new GameScreen(game);
@@ -253,7 +255,7 @@ public class Menu implements Screen {
 
 		});
 	}
-	
+
 	public void createHallOfFameB(int x, int y, Skin skin) {
 		hallOfFameB = new TextButton("", skin);
 		hallOfFameB.setX(x);
@@ -291,7 +293,7 @@ public class Menu implements Screen {
 
 		});
 	}
-	
+
 	public void createHowToPlayB(int x, int y, Skin skin) {
 		howToPlayB = new TextButton("", skin);
 		howToPlayB.setX(x);
@@ -301,7 +303,7 @@ public class Menu implements Screen {
 		howToPlayB.addListener(new ChangeListener() {
 
 			@Override
-			public void changed(ChangeEvent arg0, Actor arg1) {				
+			public void changed(ChangeEvent arg0, Actor arg1) {
 				button.play();
 				game.setScreen(howToPayScreen);
 				disableButtons();
@@ -309,7 +311,7 @@ public class Menu implements Screen {
 
 		});
 	}
-	
+
 	public void createCreditsB(int x, int y, Skin skin) {
 		creditsB = new TextButton("", skin);
 		creditsB.setX(x);
@@ -319,7 +321,7 @@ public class Menu implements Screen {
 		creditsB.addListener(new ChangeListener() {
 
 			@Override
-			public void changed(ChangeEvent arg0, Actor arg1) {				
+			public void changed(ChangeEvent arg0, Actor arg1) {
 				button.play();
 				game.setScreen(creditsScreen);
 				disableButtons();
@@ -327,7 +329,7 @@ public class Menu implements Screen {
 
 		});
 	}
-	
+
 	private void disableButtons() {
 		startB.setDisabled(true);
 		playerB.setDisabled(true);
@@ -348,7 +350,7 @@ public class Menu implements Screen {
 	@Override
 	public void dispose() {
 		storePlayer();
-		
+
 	}
 
 	@Override
@@ -362,12 +364,13 @@ public class Menu implements Screen {
 		// TODO Auto-generated method stub
 
 	}
-	
+
 	@Override
 	public void resume() {
 		// TODO Auto-generated method stub
 
 	}
+
 	public Map<Integer, User> getMapUsers() {
 		return mapUsers;
 	}

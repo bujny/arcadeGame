@@ -2,8 +2,6 @@ package jakoop.com;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Map;
-
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.audio.Sound;
