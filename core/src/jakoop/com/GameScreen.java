@@ -119,7 +119,6 @@ public class GameScreen implements Screen {
 			if (Gdx.input.isKeyPressed(Keys.ANY_KEY)) {
 				this.dispose();
 				game.setScreen(InvadersGame.getMainMenuScreen());
-				InvadersGame.getMainMenuScreen().storeScore(score);
 				// HERE WE HAVE TO RETURN SCORE VARIABLE TO SOME HIGH SCORE SCENE / SCORE SHOW CLASS
 			}
 		} else {
@@ -131,11 +130,6 @@ public class GameScreen implements Screen {
 			scoreFont.draw(spriteBatch, "Score: "+ Integer.toString(score)+" (x"+df.format(combo)+")", 25, 55);
 		}
 		spriteBatch.end();
-	}
-
-	private void storeScore() {
-		// TODO Auto-generated method stub
-		
 	}
 
 	private void checkConflicts() {

@@ -1,6 +1,7 @@
 package jakoop.com;
 
-import java.util.ArrayList;
+import java.util.Map;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.audio.Sound;
@@ -264,9 +265,9 @@ public class PlayerScreen implements Screen {
 				button.play();
 				rbXpos = 731;
 				rbYpos = 176;
-				InvadersGame.getMainMenuScreen().setCurrentUser(arrayUsers.get(5));
 				Map<Integer, User> mapUsers = InvadersGame.getMainMenuScreen().getMapUsers();
-				InvadersGame.getMainMenuScreen().setCurrentUser(mapUsers.get(6));			}
+				InvadersGame.getMainMenuScreen().setCurrentUser(mapUsers.get(6));
+			}
 		});
 	}
 
