@@ -2,7 +2,13 @@ package jakoop.com;
 
 import java.util.HashMap;
 import java.util.Map;
-
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.Writer;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.audio.Music;
@@ -55,15 +61,13 @@ public class Menu implements Screen {
 		background = new Texture(Gdx.files.internal(Resources.IMAGE_MAIN));
 		button = Gdx.audio.newSound(Gdx.files.internal(Resources.SOUND_BUTTON));
 		main = Gdx.audio.newMusic(Gdx.files.internal(Resources.MUSIC_MAIN));
-		
 		createUsers();
+		loadCurrentUser();
 		printCurrentUserName();
-		
 		newPlayerScreen = new PlayerScreen(game);
 		howToPayScreen = new HowToPlayScreen(game);
 		hallOfFameScreen = new HallOfFameScreen(game);
-		creditsScreen = new CreditsScreen(game);
-	}
+		creditsScreen = new CreditsScreen(game);	}
 
 	private void createUsers() {
 		mapUsers = new HashMap<Integer, User>();
@@ -76,7 +80,52 @@ public class Menu implements Screen {
 		mapUsers.put(6, new User(6, Resources.NAME_USER6, Resources.SKIN_USER6));
 		
 		currentUser = mapUsers.get(1);
-	}	
+	
+	public void loadCurrentUser() {
+		Integer currentID = null;
+		File file = new File("currentPlayerID.txt");
+		BufferedReader reader = null;
+
+		try {
+		    reader = new BufferedReader(new FileReader(file));
+		    String text = null;
+
+		    if ((text = reader.readLine()) != null) {
+		        currentID = (Integer.parseInt(text));
+		        currentUser = mapUsers.get(currentID);
+		    }
+		} catch (FileNotFoundException e) {
+		    e.printStackTrace();
+		} catch (IOException e) {
+		    e.printStackTrace();
+		} finally {
+		    try {
+		        if (reader != null) {
+		            reader.close();
+		        }
+		    } catch (IOException e) {
+		    	e.printStackTrace();
+		    }
+		}
+	}
+	
+	private void storePlayer() {
+		Writer file = null;
+		try {
+			file = new FileWriter("currentPlayerID.txt");
+			file.write(new Integer(currentUser.getId()).toString());
+		} catch (IOException e) {
+			e.printStackTrace();
+		}finally {
+			if(file!=null) {
+				try {
+					file.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+	}
 	
 	private void printCurrentUserName() {
 		FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal(Resources.FONT_BRODWAY));
@@ -234,6 +283,7 @@ public class Menu implements Screen {
 			@Override
 			public void changed(ChangeEvent arg0, Actor arg1) {
 				button.play();
+				storePlayer();
 				main.stop();
 				mainStage.dispose();
 				game.dispose();
@@ -297,7 +347,8 @@ public class Menu implements Screen {
 
 	@Override
 	public void dispose() {
-		// TODO Auto-generated method stub
+		storePlayer();
+		
 	}
 
 	@Override
@@ -317,7 +368,6 @@ public class Menu implements Screen {
 		// TODO Auto-generated method stub
 
 	}
-
 	public Map<Integer, User> getMapUsers() {
 		return mapUsers;
 	}
