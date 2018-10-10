@@ -1,13 +1,18 @@
 package jakoop.com;
 
 public final class Resources {
-	/** GENERAL VALUE */
-    public static final int ONE_EURO = 1; 
-    public static final int TWO_EURO = 2;
-    public static final int FIVE_EURO = 3; 
-    public static final int COLUMNS = 6;
-    public static final float SPEED_LVL = 20.0f;
+	/** GAME DEFAULTS */
+	public static final int GAME_DIFFICULTY = 1;
+	public static final float GAME_COMBO_VALUE = 1.0f;
+	public static final int GAME_ENEMY_ROWS = 20;
+    public static final int GAME_ENEMY_COLUMNS = 6;
+    public static final float GAME_SPEED_LVL = 20.0f;
     
+	/** COIN VALUE */
+    public static final int COIN_ONE_EURO = 1; 
+    public static final int COIN_TWO_EURO = 2;
+    public static final int COIN_FIVE_EURO = 3; 
+
     /** MUSIC */
     public static final String MUSIC_MAIN = "sound\\main.mp3";
     public static final String MUSIC_STAGE = "sound\\stage.mp3";
@@ -22,15 +27,15 @@ public final class Resources {
     public static final String SOUND_THROW_COIN = "sound\\throwCoin.mp3";
     public static final String SOUND_VICTORY = "sound\\victory.mp3";
     
-    /** ENEMY ICONS */
-    public static final String ENEMY_BEER = "image\\beer.png";
-    public static final String ENEMY_DRINK = "image\\drink.png";
-    public static final String ENEMY_SHOT = "image\\shot.png";
+    /** ENEMY IMAGES */
+    public static final String IMAGE_ENEMY_BEER = "image\\beer.png";
+    public static final String IMAGE_ENEMY_DRINK = "image\\drink.png";
+    public static final String IMAGE_ENEMY_SHOT = "image\\shot.png";
     
-    /** COIN ICONS */
-    public static final String COIN_ONE = "image\\one.png";
-    public static final String COIN_TWO = "image\\two.png";
-    public static final String COIN_FIVE = "image\\five.png";
+    /** COIN IMAGES */
+    public static final String IMAGE_COIN_ONE = "image\\one.png";
+    public static final String IMAGE_COIN_TWO = "image\\two.png";
+    public static final String IMAGE_COIN_FIVE = "image\\five.png";
     
     /** BACKGROUND IMAGES */
     public static final String IMAGE_MAIN = "image\\main.png";
@@ -42,12 +47,12 @@ public final class Resources {
 	public static final String IMAGE_SELECT_PLAYER = "image\\selectPlayer.png";
 	
 	/** USER SKINS */
-	public static final String SKIN_USER1 = "image\\skinP1.png";
-	public static final String SKIN_USER2 = "image\\skinP2.png";
-	public static final String SKIN_USER3 = "image\\skinP3.png";
-	public static final String SKIN_USER4 = "image\\skinP4.png";
-	public static final String SKIN_USER5 = "image\\skinP5.png";
-	public static final String SKIN_USER6 = "image\\skinP6.png";
+	public static final String SKIN_USER1 = "skin\\skinP1.png";
+	public static final String SKIN_USER2 = "skin\\skinP2.png";
+	public static final String SKIN_USER3 = "skin\\skinP3.png";
+	public static final String SKIN_USER4 = "skin\\skinP4.png";
+	public static final String SKIN_USER5 = "skin\\skinP5.png";
+	public static final String SKIN_USER6 = "skin\\skinP6.png";
 	
 	/** USER NAMES */
 	public static final String NAME_USER1 = "Patxi";
@@ -64,13 +69,13 @@ public final class Resources {
 	public static final String IMAGE_HEART = "image\\heart.png";
 	public static final String IMAGE_RB_SELECTED = "image\\rbSelected.png";
 	
-	/** GAME ICON */
-	 public static final String GAME_ICON_128 = "icon\\icon_128.png";
-	 public static final String GAME_ICON_32 = "icon\\icon_32.png";
-	 public static final String GAME_ICON_16 = "icon\\icon_16.png";
+	/** ICON */
+	 public static final String ICON_128 = "icon\\icon_128.png";
+	 public static final String ICON_32 = "icon\\icon_32.png";
+	 public static final String ICON_16 = "icon\\icon_16.png";
 	 
 	/** FONTS */
-	 public static final String FONT_BRODWAY = "fonts\\broadway.ttf";
+	 public static final String FONT_BRODWAY = "font\\broadway.ttf";
 	 
 	 /** DATA FILES */
 	 public static final String DATA_USER = "data\\user.dat";

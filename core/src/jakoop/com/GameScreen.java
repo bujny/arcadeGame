@@ -41,8 +41,8 @@ public class GameScreen implements Screen {
 	private Texture gameOver;
 	private Texture youWin;
 	private Texture pressKey;
-	private int score=0;
-	private float combo=1.0f;
+	private int score;
+	private float combo;
 	private BitmapFont scoreFont;
 	DecimalFormat df;
 
@@ -51,7 +51,9 @@ public class GameScreen implements Screen {
 		this.stageFinished = false;
 		this.game = game;
 		this.spriteBatch = game.spriteBatch;
-		this.difficulty = 1;
+		this.difficulty = Resources.GAME_DIFFICULTY;
+		this.score = 0;
+		this.combo = Resources.GAME_COMBO_VALUE;
 		chooseSettings();
 		enemies = new EnemyWave(enemiesDimension, speed);
 		camera = new OrthographicCamera();
@@ -80,9 +82,9 @@ public class GameScreen implements Screen {
 
 	private void chooseSettings() {
 		enemiesDimension = new int[2];
-		enemiesDimension[0] = 14 * difficulty; // rows
-		enemiesDimension[1] = Resources.COLUMNS; // columns
-		speed = Resources.SPEED_LVL;
+		enemiesDimension[0] = Resources.GAME_ENEMY_ROWS * difficulty; // rows
+		enemiesDimension[1] = Resources.GAME_ENEMY_COLUMNS; // columns
+		speed = Resources.GAME_SPEED_LVL;
 	}
 
 	@Override
@@ -117,9 +119,15 @@ public class GameScreen implements Screen {
 				spriteBatch.draw(youWin, 340, 220, 600, 300);
 			}
 			if (Gdx.input.isKeyPressed(Keys.ANY_KEY)) {
-				recordScore();
-				this.dispose();
-				game.setScreen(InvadersGame.getMainMenuScreen());
+				try {
+					Thread.sleep(2000);
+					recordScore();
+					this.dispose();
+					game.setScreen(InvadersGame.getMainMenuScreen());
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
 		} else {
 			spriteBatch.draw(stageBackground, 0, 0);

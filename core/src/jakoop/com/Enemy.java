@@ -17,18 +17,18 @@ public class Enemy {
 		this.posY = posY;
 		value = valueType;
 		
-		if(value == Resources.ONE_EURO) {
-			texture = new Texture(Gdx.files.internal(Resources.ENEMY_BEER));
+		if(value == Resources.COIN_ONE_EURO) {
+			texture = new Texture(Gdx.files.internal(Resources.IMAGE_ENEMY_BEER));
 			width = 45;
 			height = 65;
 		}
-		else if(value == Resources.TWO_EURO) {
-				texture = new Texture(Gdx.files.internal(Resources.ENEMY_SHOT));
+		else if(value == Resources.COIN_TWO_EURO) {
+				texture = new Texture(Gdx.files.internal(Resources.IMAGE_ENEMY_SHOT));
 				width = 33;
 				height = 44;
 			} 
-		else if(value == Resources.FIVE_EURO) {
-			texture = new Texture(Gdx.files.internal(Resources.ENEMY_DRINK));
+		else if(value == Resources.COIN_FIVE_EURO) {
+			texture = new Texture(Gdx.files.internal(Resources.IMAGE_ENEMY_DRINK));
 			width = 54;
 			height = 70;
 		}

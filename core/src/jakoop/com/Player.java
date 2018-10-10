@@ -29,7 +29,7 @@ public class Player {
 		height = 70;
 		posX = 640 - width / 2;
 		posY = 180 - height / 2;
-		currentCoin = Resources.ONE_EURO;
+		currentCoin = Resources.COIN_ONE_EURO;
 		staticCoin = new Coin(currentCoin, 605, 15);
 		lifes = new Lifes();
 		texture = new Texture(Gdx.files.internal(InvadersGame.getMainMenuScreen().getCurrentUser().getSkin()));
@@ -72,11 +72,11 @@ public class Player {
 			posY = 360 - height;
 
 		if (Gdx.input.isKeyJustPressed(Keys.NUM_1)) {
-			changeCoin(Resources.ONE_EURO);
+			changeCoin(Resources.COIN_ONE_EURO);
 		} else if (Gdx.input.isKeyJustPressed(Keys.NUM_2)) {
-			changeCoin(Resources.TWO_EURO);
+			changeCoin(Resources.COIN_TWO_EURO);
 		} else if (Gdx.input.isKeyJustPressed(Keys.NUM_3)) {
-			changeCoin(Resources.FIVE_EURO);
+			changeCoin(Resources.COIN_FIVE_EURO);
 		}
 		if (Gdx.input.isKeyJustPressed(Keys.SPACE)) {
 			coins.add(new Coin(currentCoin, posX + (width / 2), posY + height));
@@ -86,20 +86,20 @@ public class Player {
 	}
 
 	void changeCoin(int coin) {
-		if (Resources.TWO_EURO == coin) {
-			currentCoin = Resources.TWO_EURO;
+		if (Resources.COIN_TWO_EURO == coin) {
+			currentCoin = Resources.COIN_TWO_EURO;
 			staticCoin = new Coin(currentCoin, 605, 15);
 			changeCoin.play();
 			return;
 		}
-		if (Resources.FIVE_EURO == coin) {
-			currentCoin = Resources.FIVE_EURO;
+		if (Resources.COIN_FIVE_EURO == coin) {
+			currentCoin = Resources.COIN_FIVE_EURO;
 			staticCoin = new Coin(currentCoin, 605, 15);
 			changeCoin.play();
 			return;
 		}
-		if (Resources.ONE_EURO == coin) {
-			currentCoin = Resources.ONE_EURO;
+		if (Resources.COIN_ONE_EURO == coin) {
+			currentCoin = Resources.COIN_ONE_EURO;
 			staticCoin = new Coin(currentCoin, 605, 15);
 			changeCoin.play();
 			return;

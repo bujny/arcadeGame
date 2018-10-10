@@ -21,14 +21,14 @@ public class Coin {
 		this.posX -= width/2; 
 		this.posY = posY;
 		this.value = value;
-		if(value == Resources.ONE_EURO) {
-			texture = new Texture(Gdx.files.internal(Resources.COIN_ONE));
+		if(value == Resources.COIN_ONE_EURO) {
+			texture = new Texture(Gdx.files.internal(Resources.IMAGE_COIN_ONE));
 		}
-		else if(value == Resources.TWO_EURO) {
-				texture = new Texture(Gdx.files.internal(Resources.COIN_TWO));
+		else if(value == Resources.COIN_TWO_EURO) {
+				texture = new Texture(Gdx.files.internal(Resources.IMAGE_COIN_TWO));
 			} 
-		else if(value == Resources.FIVE_EURO) {
-			texture = new Texture(Gdx.files.internal(Resources.COIN_FIVE));
+		else if(value == Resources.COIN_FIVE_EURO) {
+			texture = new Texture(Gdx.files.internal(Resources.IMAGE_COIN_FIVE));
 		}
 	}
 	
