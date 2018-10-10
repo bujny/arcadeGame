@@ -76,14 +76,6 @@ public class Menu implements Screen {
 		mapUsers.put(6, new User(6, Resources.NAME_USER6, Resources.SKIN_USER6));
 		
 		currentUser = mapUsers.get(1);
-		
-		// ERASE, IS FOR CHECKING
-		mapUsers.get(1).setScore(10);
-		mapUsers.get(2).setScore(60);
-		mapUsers.get(3).setScore(30);
-		mapUsers.get(4).setScore(50);
-		mapUsers.get(5).setScore(40);
-		mapUsers.get(6).setScore(20);
 	}	
 	
 	private void printCurrentUserName() {
