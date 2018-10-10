@@ -1,9 +1,5 @@
 package jakoop.com;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.audio.Sound;
@@ -34,7 +30,7 @@ public class HallOfFameScreen implements Screen {
 	private TextButton okB;
 	private TextButton resetScoresB;
 	private BitmapFont userFont;
-	private ArrayList<User> orderedArrayUsers;
+
 	
 	public HallOfFameScreen(final InvadersGame game) {
 		this.game = game;
@@ -43,7 +39,6 @@ public class HallOfFameScreen implements Screen {
 		camera.setToOrtho(false, 1280, 720);
 		background = new Texture(Gdx.files.internal(Resources.IMAGE_HALL_OF_FAME));
 		button = Gdx.audio.newSound(Gdx.files.internal(Resources.SOUND_BUTTON));
-		getUserScores();
 		printUserScores();
 	}
 	
@@ -55,12 +50,6 @@ public class HallOfFameScreen implements Screen {
 		generator.dispose();
 	}
 
-	private void getUserScores() {
-		orderedArrayUsers = new ArrayList<User>();
-		
-		Collections.sort(orderedArrayUsers, (user1, user2) -> user1.getScore() - user2.getScore());
-	}
-	
 	@Override
 	public void show() {
 		hallOfFameStage = new Stage(new ScreenViewport());
@@ -126,7 +115,12 @@ public class HallOfFameScreen implements Screen {
 			@Override
 			public void changed(ChangeEvent arg0, Actor arg1) {
 				button.play();
-				// RESET THE SCORES CODE
+				InvadersGame.getMainMenuScreen().getMapUsers().get(1).setScore(0);
+				InvadersGame.getMainMenuScreen().getMapUsers().get(2).setScore(0);
+				InvadersGame.getMainMenuScreen().getMapUsers().get(3).setScore(0);
+				InvadersGame.getMainMenuScreen().getMapUsers().get(4).setScore(0);
+				InvadersGame.getMainMenuScreen().getMapUsers().get(5).setScore(0);
+				InvadersGame.getMainMenuScreen().getMapUsers().get(6).setScore(0);
 			}
 		});
 	}
@@ -138,12 +132,11 @@ public class HallOfFameScreen implements Screen {
 		spriteBatch.setProjectionMatrix(camera.combined);
 		spriteBatch.begin();
 		spriteBatch.draw(background, 0, 0);
-		//userFont.draw(spriteBatch, "" + orderedArrayUsers.get(0), 500, 650);
-		//userFont.draw(spriteBatch, "" + orderedArrayUsers.get(1), 500, 550);
-		//userFont.draw(spriteBatch, "" + orderedArrayUsers.get(2), 500, 450);
-		//userFont.draw(spriteBatch, "" + orderedArrayUsers.get(3), 500, 350);
-		//userFont.draw(spriteBatch, "" + orderedArrayUsers.get(4), 500, 250);
-		//userFont.draw(spriteBatch, "" + orderedArrayUsers.get(2), 500, 150);
+		userFont.draw(spriteBatch, "" + InvadersGame.getMainMenuScreen().getMapUsers().get(1).getName() + "                    " + InvadersGame.getMainMenuScreen().getMapUsers().get(1).getScore(), 493, 418);
+		userFont.draw(spriteBatch, "" + InvadersGame.getMainMenuScreen().getMapUsers().get(2).getName() + "                    " + InvadersGame.getMainMenuScreen().getMapUsers().get(2).getScore(), 493, 358);
+		userFont.draw(spriteBatch, "" + InvadersGame.getMainMenuScreen().getMapUsers().get(3).getName() + "                    " + InvadersGame.getMainMenuScreen().getMapUsers().get(3).getScore(), 493, 298);
+		userFont.draw(spriteBatch, "" + InvadersGame.getMainMenuScreen().getMapUsers().get(4).getName() + "                    " + InvadersGame.getMainMenuScreen().getMapUsers().get(4).getScore(), 493, 238);
+		userFont.draw(spriteBatch, "" + InvadersGame.getMainMenuScreen().getMapUsers().get(5).getName() + "                    " + InvadersGame.getMainMenuScreen().getMapUsers().get(5).getScore(), 493, 178);
 		spriteBatch.end();
 		hallOfFameStage.draw();
 			

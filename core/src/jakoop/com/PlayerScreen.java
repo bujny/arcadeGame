@@ -1,10 +1,6 @@
 package jakoop.com;
 
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.Writer;
 import java.util.ArrayList;
-
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.audio.Sound;
@@ -146,7 +142,6 @@ public class PlayerScreen implements Screen {
 				playerStage.dispose();
 				game.setScreen(InvadersGame.getMainMenuScreen());
 				disableButtons();
-				InvadersGame.getMainMenuScreen().loadCurrentUser();
 			}
 		});
 	}
@@ -174,8 +169,8 @@ public class PlayerScreen implements Screen {
 				button.play();
 				rbXpos = 174;
 				rbYpos = 409;
-				ArrayList<User> arrayUsers = InvadersGame.getMainMenuScreen().getArrayUsers();
-				InvadersGame.getMainMenuScreen().setCurrentUser(arrayUsers.get(0));
+				Map<Integer, User> mapUsers = InvadersGame.getMainMenuScreen().getMapUsers();
+				InvadersGame.getMainMenuScreen().setCurrentUser(mapUsers.get(1));
 			}
 		});
 	}
@@ -193,8 +188,8 @@ public class PlayerScreen implements Screen {
 				button.play();
 				rbXpos = 174;
 				rbYpos = 292;
-				ArrayList<User> arrayUsers = InvadersGame.getMainMenuScreen().getArrayUsers();
-				InvadersGame.getMainMenuScreen().setCurrentUser(arrayUsers.get(1));
+				Map<Integer, User> mapUsers = InvadersGame.getMainMenuScreen().getMapUsers();
+				InvadersGame.getMainMenuScreen().setCurrentUser(mapUsers.get(2));
 			}
 		});
 	}
@@ -212,8 +207,8 @@ public class PlayerScreen implements Screen {
 				button.play();
 				rbXpos = 174;
 				rbYpos = 176;
-				ArrayList<User> arrayUsers = InvadersGame.getMainMenuScreen().getArrayUsers();
-				InvadersGame.getMainMenuScreen().setCurrentUser(arrayUsers.get(2));
+				Map<Integer, User> mapUsers = InvadersGame.getMainMenuScreen().getMapUsers();
+				InvadersGame.getMainMenuScreen().setCurrentUser(mapUsers.get(3));
 			}
 		});
 	}
@@ -231,8 +226,8 @@ public class PlayerScreen implements Screen {
 				button.play();
 				rbXpos = 731;
 				rbYpos = 408;
-				ArrayList<User> arrayUsers = InvadersGame.getMainMenuScreen().getArrayUsers();
-				InvadersGame.getMainMenuScreen().setCurrentUser(arrayUsers.get(3));
+				Map<Integer, User> mapUsers = InvadersGame.getMainMenuScreen().getMapUsers();
+				InvadersGame.getMainMenuScreen().setCurrentUser(mapUsers.get(4));
 			}
 		});
 	}
@@ -250,8 +245,8 @@ public class PlayerScreen implements Screen {
 				button.play();
 				rbXpos = 731;
 				rbYpos = 292;
-				ArrayList<User> arrayUsers = InvadersGame.getMainMenuScreen().getArrayUsers();
-				InvadersGame.getMainMenuScreen().setCurrentUser(arrayUsers.get(4));
+				Map<Integer, User> mapUsers = InvadersGame.getMainMenuScreen().getMapUsers();
+				InvadersGame.getMainMenuScreen().setCurrentUser(mapUsers.get(5));
 			}
 		});
 	}
@@ -269,10 +264,9 @@ public class PlayerScreen implements Screen {
 				button.play();
 				rbXpos = 731;
 				rbYpos = 176;
-				
-				ArrayList<User> arrayUsers = InvadersGame.getMainMenuScreen().getArrayUsers();
 				InvadersGame.getMainMenuScreen().setCurrentUser(arrayUsers.get(5));
-			}
+				Map<Integer, User> mapUsers = InvadersGame.getMainMenuScreen().getMapUsers();
+				InvadersGame.getMainMenuScreen().setCurrentUser(mapUsers.get(6));			}
 		});
 	}
 
@@ -284,12 +278,12 @@ public class PlayerScreen implements Screen {
 		spriteBatch.begin();
 		spriteBatch.draw(background, 0, 0);
 		spriteBatch.draw(rbSelected, rbXpos, rbYpos, 44, 44);
-		userFont.draw(spriteBatch, InvadersGame.getMainMenuScreen().getArrayUsers().get(0).getName(), 280, 450);
-		userFont.draw(spriteBatch, InvadersGame.getMainMenuScreen().getArrayUsers().get(1).getName(), 280, 332);
-		userFont.draw(spriteBatch, InvadersGame.getMainMenuScreen().getArrayUsers().get(2).getName(), 280, 219);
-		userFont.draw(spriteBatch, InvadersGame.getMainMenuScreen().getArrayUsers().get(3).getName(), 835, 450);
-		userFont.draw(spriteBatch, InvadersGame.getMainMenuScreen().getArrayUsers().get(4).getName(), 835, 332);
-		userFont.draw(spriteBatch, InvadersGame.getMainMenuScreen().getArrayUsers().get(5).getName(), 835, 219);
+		userFont.draw(spriteBatch, InvadersGame.getMainMenuScreen().getMapUsers().get(1).getName(), 280, 450);
+		userFont.draw(spriteBatch, InvadersGame.getMainMenuScreen().getMapUsers().get(2).getName(), 280, 332);
+		userFont.draw(spriteBatch, InvadersGame.getMainMenuScreen().getMapUsers().get(3).getName(), 280, 219);
+		userFont.draw(spriteBatch, InvadersGame.getMainMenuScreen().getMapUsers().get(4).getName(), 835, 450);
+		userFont.draw(spriteBatch, InvadersGame.getMainMenuScreen().getMapUsers().get(5).getName(), 835, 332);
+		userFont.draw(spriteBatch, InvadersGame.getMainMenuScreen().getMapUsers().get(6).getName(), 835, 219);
 		spriteBatch.end();
 		playerStage.draw();	
 	}
