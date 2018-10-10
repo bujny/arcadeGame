@@ -85,7 +85,7 @@ public class Menu implements Screen {
 	
 	public void loadCurrentUser() {
 		Integer currentID = null;
-		File file = new File("currentPlayerID.txt");
+		File file = new File(Resources.DATA_USER);
 		BufferedReader reader = null;
 
 		try {
@@ -114,7 +114,7 @@ public class Menu implements Screen {
 	private void storePlayer() {
 		Writer file = null;
 		try {
-			file = new FileWriter("currentPlayerID.txt");
+			file = new FileWriter(Resources.DATA_USER);
 			file.write(new Integer(currentUser.getId()).toString());
 		} catch (IOException e) {
 			e.printStackTrace();
