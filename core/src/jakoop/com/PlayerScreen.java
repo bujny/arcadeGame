@@ -1,5 +1,8 @@
 package jakoop.com;
 
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.Writer;
 import java.util.ArrayList;
 
 import com.badlogic.gdx.Gdx;
@@ -143,6 +146,7 @@ public class PlayerScreen implements Screen {
 				playerStage.dispose();
 				game.setScreen(InvadersGame.getMainMenuScreen());
 				disableButtons();
+				InvadersGame.getMainMenuScreen().loadCurrentUser();
 			}
 		});
 	}
@@ -265,6 +269,7 @@ public class PlayerScreen implements Screen {
 				button.play();
 				rbXpos = 731;
 				rbYpos = 176;
+				
 				ArrayList<User> arrayUsers = InvadersGame.getMainMenuScreen().getArrayUsers();
 				InvadersGame.getMainMenuScreen().setCurrentUser(arrayUsers.get(5));
 			}

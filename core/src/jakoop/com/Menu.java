@@ -1,5 +1,12 @@
 package jakoop.com;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.Writer;
 import java.util.ArrayList;
 
 import com.badlogic.gdx.Gdx;
@@ -59,6 +66,7 @@ public class Menu implements Screen {
 		hallOfFameScreen = new HallOfFameScreen(game);
 		creditsScreen = new CreditsScreen(game);
 		createUsers();
+		loadCurrentUser();
 		printCurrentUserName();
 	}
 
@@ -80,7 +88,53 @@ public class Menu implements Screen {
 		arrayUsers.get(3).setScore(50);
 		arrayUsers.get(4).setScore(40);
 		arrayUsers.get(5).setScore(20);
-	}	
+	}
+	
+	public void loadCurrentUser() {
+		Integer currentID = null;
+		File file = new File("currentPlayerID.txt");
+		BufferedReader reader = null;
+
+		try {
+		    reader = new BufferedReader(new FileReader(file));
+		    String text = null;
+
+		    if ((text = reader.readLine()) != null) {
+		        currentID = (Integer.parseInt(text));
+		        currentUser = arrayUsers.get(currentID);
+		    }
+		} catch (FileNotFoundException e) {
+		    e.printStackTrace();
+		} catch (IOException e) {
+		    e.printStackTrace();
+		} finally {
+		    try {
+		        if (reader != null) {
+		            reader.close();
+		        }
+		    } catch (IOException e) {
+		    	e.printStackTrace();
+		    }
+		}
+	}
+	
+	private void storePlayer() {
+		Writer file = null;
+		try {
+			file = new FileWriter("currentPlayerID.txt");
+			file.write(new Integer(currentUser.getId()).toString());
+		} catch (IOException e) {
+			e.printStackTrace();
+		}finally {
+			if(file!=null) {
+				try {
+					file.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+	}
 	
 	private void printCurrentUserName() {
 		FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal(Resources.FONT_BRODWAY));
@@ -238,6 +292,7 @@ public class Menu implements Screen {
 			@Override
 			public void changed(ChangeEvent arg0, Actor arg1) {
 				button.play();
+				storePlayer();
 				main.stop();
 				mainStage.dispose();
 				game.dispose();
@@ -309,7 +364,8 @@ public class Menu implements Screen {
 
 	@Override
 	public void dispose() {
-		// TODO Auto-generated method stub
+		storePlayer();
+		
 	}
 
 	@Override
@@ -329,5 +385,46 @@ public class Menu implements Screen {
 		// TODO Auto-generated method stub
 
 	}
-	
+
+	public void storeScore(int score) {
+		Integer currentID = null;
+		File file = new File("highscores.txt");
+		BufferedReader reader = null;
+
+		try {
+		    reader = new BufferedReader(new FileReader(file));
+		    String text = null;
+
+		    if ((text = reader.readLine()) != null) {
+		    }
+		} catch (FileNotFoundException e) {
+		    e.printStackTrace();
+		} catch (IOException e) {
+		    e.printStackTrace();
+		} finally {
+		    try {
+		        if (reader != null) {
+		            reader.close();
+		        }
+		    } catch (IOException e) {
+		    	e.printStackTrace();
+		    }
+		}
+		
+		Writer file = null;
+		try {
+			file = new FileWriter("currentPlayerID.txt");
+			file.write((new Integer(currentUser.getId()).toString())+"="+score);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}finally {
+			if(file!=null) {
+				try {
+					file.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+	}
 }
