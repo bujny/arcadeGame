@@ -50,12 +50,12 @@ public final class Resources {
 	public static final String SKIN_USER6 = "image\\skinP6.png";
 	
 	/** USER NAMES */
-	public static final String NAME_USER1 = "user1";
-	public static final String NAME_USER2 = "user2";
-	public static final String NAME_USER3 = "user3";
-	public static final String NAME_USER4 = "user4";
-	public static final String NAME_USER5 = "user5";
-	public static final String NAME_USER6 = "user6";
+	public static final String NAME_USER1 = "Patxi";
+	public static final String NAME_USER2 = "Goral";
+	public static final String NAME_USER3 = "Shelby";
+	public static final String NAME_USER4 = "Teresa";
+	public static final String NAME_USER5 = "Vladislav";
+	public static final String NAME_USER6 = "Yu Yan";
 	
     /** GENERAL IMAGES */
 	public static final String IMAGE_PRESS_KEY = "image\\pressAnyKey.png";

@@ -50,8 +50,6 @@ public class PlayerScreen implements Screen {
 		background = new Texture(Gdx.files.internal(Resources.IMAGE_SELECT_PLAYER));
 		button = Gdx.audio.newSound(Gdx.files.internal(Resources.SOUND_BUTTON));
 		rbSelected = new Texture(Gdx.files.internal(Resources.IMAGE_RB_SELECTED));
-		rbXpos = 174;
-		rbYpos = 409;
 		printUserNames();
 	}
 	
@@ -68,6 +66,40 @@ public class PlayerScreen implements Screen {
 		playerStage = new Stage(new ScreenViewport());
 		showButtons();
 		Gdx.input.setInputProcessor(playerStage);
+		selectUser();
+	}
+
+	private void selectUser() {
+		switch(InvadersGame.getMainMenuScreen().getCurrentUser().getId()) {
+		case 1:
+			rbXpos = 174;
+			rbYpos = 409;
+			break;
+		case 2:
+			rbXpos = 174;
+			rbYpos = 292;
+			break;
+		
+		case 3:
+			rbXpos = 174;
+			rbYpos = 176;
+			break;
+			
+		case 4:
+			rbXpos = 731;
+			rbYpos = 408;
+			break;
+			
+		case 5:
+			rbXpos = 731;
+			rbYpos = 292;
+			break;
+			
+		case 6:
+			rbXpos = 731;
+			rbYpos = 176;
+			break;
+		}
 	}
 	
 	public void showButtons() {
