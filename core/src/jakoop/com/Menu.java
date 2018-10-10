@@ -75,12 +75,12 @@ public class Menu implements Screen {
 	private void createUsers() {
 		mapUsers = new HashMap<Integer, User>();
 		
-		mapUsers.put(1, new User(1, Resources.NAME_USER1, Resources.SKIN_USER1));
-		mapUsers.put(2, new User(2, Resources.NAME_USER2, Resources.SKIN_USER2));
-		mapUsers.put(3, new User(3, Resources.NAME_USER3, Resources.SKIN_USER3));
-		mapUsers.put(4, new User(4, Resources.NAME_USER4, Resources.SKIN_USER4));
-		mapUsers.put(5, new User(5, Resources.NAME_USER5, Resources.SKIN_USER5));
-		mapUsers.put(6, new User(6, Resources.NAME_USER6, Resources.SKIN_USER6));
+		mapUsers.put(1, new User(1, Resources.NAME_USER1, Resources.SKIN_USER1, Resources.SONG_USER1));
+		mapUsers.put(2, new User(2, Resources.NAME_USER2, Resources.SKIN_USER2, Resources.SONG_USER2));
+		mapUsers.put(3, new User(3, Resources.NAME_USER3, Resources.SKIN_USER3, Resources.SONG_USER3));
+		mapUsers.put(4, new User(4, Resources.NAME_USER4, Resources.SKIN_USER4, Resources.SONG_USER4));
+		mapUsers.put(5, new User(5, Resources.NAME_USER5, Resources.SKIN_USER5, Resources.SONG_USER5));
+		mapUsers.put(6, new User(6, Resources.NAME_USER6, Resources.SKIN_USER6, Resources.SONG_USER6));
 		
 		currentUser = mapUsers.get(1);
 	}

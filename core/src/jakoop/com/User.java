@@ -3,13 +3,15 @@ package jakoop.com;
 public class User {
 	private int id;
 	private String name;
-	private int score;
 	private String skin;
+	private String song;
+	private int score;
 	
-	public User (int id, String name, String skin) {
+	public User (int id, String name, String skin, String song) {
 		this.id = id;
 		this.name = name;
 		this.skin = skin;
+		this.song = song;
 		this.score = 0;
 	}
 
@@ -29,19 +31,27 @@ public class User {
 		this.name = name;
 	}
 
-	public int getScore() {
-		return score;
-	}
-
-	public void setScore(int score) {
-		this.score = score;
-	}
-
 	public String getSkin() {
 		return skin;
 	}
 
 	public void setSkin(String skin) {
 		this.skin = skin;
+	}
+	
+	public String getSong() {
+		return song;
+	}
+
+	public void setSong(String song) {
+		this.song = song;
+	}
+	
+	public int getScore() {
+		return score;
+	}
+
+	public void setScore(int score) {
+		this.score = score;
 	}
 }

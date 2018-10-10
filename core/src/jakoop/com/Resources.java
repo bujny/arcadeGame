@@ -2,20 +2,20 @@ package jakoop.com;
 
 public final class Resources {
 	/** GAME DEFAULTS */
-	public static final int GAME_DIFFICULTY = 1;
+	public static final int GAME_DIFFICULTY = 2;
 	public static final float GAME_COMBO_VALUE = 1.0f;
 	public static final int GAME_ENEMY_ROWS = 20;
     public static final int GAME_ENEMY_COLUMNS = 6;
     public static final float GAME_SPEED_LVL = 20.0f;
+    public static final float GAME_VOLUME = 0.35f;
     
 	/** COIN VALUE */
     public static final int COIN_ONE_EURO = 1; 
     public static final int COIN_TWO_EURO = 2;
     public static final int COIN_FIVE_EURO = 3; 
 
-    /** MUSIC */
+    /** MAIN MENU SONG */
     public static final String MUSIC_MAIN = "sound\\main.mp3";
-    public static final String MUSIC_STAGE = "sound\\stage.mp3";
     
     /** SOUNDS */
     public static final String SOUND_BUTTON = "sound\\button.mp3";
@@ -53,6 +53,14 @@ public final class Resources {
 	public static final String SKIN_USER4 = "skin\\skinP4.png";
 	public static final String SKIN_USER5 = "skin\\skinP5.png";
 	public static final String SKIN_USER6 = "skin\\skinP6.png";
+	
+	/** USER SONGS */
+	public static final String SONG_USER1 = "sound\\songP1.mp3";
+	public static final String SONG_USER2 = "sound\\songP2.mp3";
+	public static final String SONG_USER3 = "sound\\songP3.mp3";
+	public static final String SONG_USER4 = "sound\\songP4.mp3";
+	public static final String SONG_USER5 = "sound\\songP5.mp3";
+	public static final String SONG_USER6 = "sound\\songP6.mp3";
 	
 	/** USER NAMES */
 	public static final String NAME_USER1 = "Patxi";

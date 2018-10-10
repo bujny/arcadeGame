@@ -29,18 +29,18 @@ public class GameScreen implements Screen {
 	private Texture background;
 	private Player player;
 	private Music stage;
-	private Sound youLose;
+	private Sound gameOver;
 	private Sound victory;
 	private Sound loseLife;
 	private Sound drinkHit;
 	private Sound stageComplete;
 	private EnemyWave enemies;
 	private boolean isGameOver;
-	private boolean hasWon;
+	private boolean isVictory;
 	private boolean stageFinished;
-	private Texture gameOver;
-	private Texture youWin;
-	private Texture pressKey;
+	private Texture gameOverTexture;
+	private Texture youWinTexture;
+	private Texture pressKeyTexture;
 	private int score;
 	private float combo;
 	private BitmapFont scoreFont;
@@ -62,12 +62,12 @@ public class GameScreen implements Screen {
 		stageBackground = new Texture(Gdx.files.internal(Resources.IMAGE_STAGE_BACKGROUND));
 		background = new Texture(Gdx.files.internal(Resources.IMAGE_BACKGROUND));
 		player = new Player();
-		stage = Gdx.audio.newMusic(Gdx.files.internal(Resources.MUSIC_STAGE));
+		stage = Gdx.audio.newMusic(Gdx.files.internal(InvadersGame.getMainMenuScreen().getCurrentUser().getSong()));
 		stage.play();
-		stage.setVolume(0.1f);
-		gameOver = new Texture(Gdx.files.internal(Resources.IMAGE_GAME_OVER));
-		youWin = new Texture(Gdx.files.internal(Resources.IMAGE_YOU_WIN));
-		pressKey = new Texture(Gdx.files.internal(Resources.IMAGE_PRESS_KEY));
+		stage.setVolume(Resources.GAME_VOLUME);
+		gameOverTexture = new Texture(Gdx.files.internal(Resources.IMAGE_GAME_OVER));
+		youWinTexture = new Texture(Gdx.files.internal(Resources.IMAGE_YOU_WIN));
+		pressKeyTexture = new Texture(Gdx.files.internal(Resources.IMAGE_PRESS_KEY));
 		printScore();
 	}
 	
@@ -102,25 +102,25 @@ public class GameScreen implements Screen {
 
 		if (isGameOver && !stageFinished) {
 			stage.stop();
-			youLose = Gdx.audio.newSound(Gdx.files.internal(Resources.SOUND_GAME_OVER));
-			youLose.play();
+			gameOver = Gdx.audio.newSound(Gdx.files.internal(Resources.SOUND_GAME_OVER));
+			gameOver.play();
 			stageFinished = true;
-		} else if (hasWon && !stageFinished) {
+		} else if (isVictory && !stageFinished) {
 			stage.stop();
 			victory = Gdx.audio.newSound(Gdx.files.internal(Resources.SOUND_VICTORY));
 			victory.play();
 			stageFinished = true;
 		} else if (stageFinished) {
 			spriteBatch.draw(background, 0, 0);
-			spriteBatch.draw(pressKey, 350, 70, 600, 100);
+			spriteBatch.draw(pressKeyTexture, 350, 70, 600, 100);
 			if (isGameOver) {
-				spriteBatch.draw(gameOver, 340, 220, 600, 300);
-			} else if (hasWon) {
-				spriteBatch.draw(youWin, 340, 220, 600, 300);
+				spriteBatch.draw(gameOverTexture, 340, 220, 600, 300);
+			} else if (isVictory) {
+				spriteBatch.draw(youWinTexture, 340, 220, 600, 300);
 			}
 			if (Gdx.input.isKeyPressed(Keys.ANY_KEY)) {
 				try {
-					Thread.sleep(2000);
+					Thread.sleep(1000);
 					recordScore();
 					this.dispose();
 					game.setScreen(InvadersGame.getMainMenuScreen());
@@ -129,6 +129,7 @@ public class GameScreen implements Screen {
 					e.printStackTrace();
 				}
 			}
+
 		} else {
 			spriteBatch.draw(stageBackground, 0, 0);
 			player.draw(spriteBatch);
@@ -177,7 +178,7 @@ public class GameScreen implements Screen {
 					if (enemies.getEnemies().isEmpty()) {
 						stageComplete = Gdx.audio.newSound(Gdx.files.internal(Resources.SOUND_STAGE_COMPLETE));
 						stageComplete.play();
-						hasWon = true;
+						isVictory = true;
 					}
 					break;
 				default:
