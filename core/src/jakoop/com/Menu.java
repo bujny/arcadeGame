@@ -85,7 +85,7 @@ public class Menu implements Screen {
 	
 	public void loadCurrentUser() {
 		Integer currentID = null;
-		File file = new File("currentPlayerID.txt");
+		File file = new File(Resources.DATA_USER);
 		BufferedReader reader = null;
 
 		try {
@@ -114,7 +114,7 @@ public class Menu implements Screen {
 	private void storePlayer() {
 		Writer file = null;
 		try {
-			file = new FileWriter("currentPlayerID.txt");
+			file = new FileWriter(Resources.DATA_USER);
 			file.write(new Integer(currentUser.getId()).toString());
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -129,6 +129,49 @@ public class Menu implements Screen {
 		}
 	}
 
+	public void loadScores() {
+		BufferedReader in = null;
+		String linea;
+		try {
+			in = new BufferedReader(new BufferedReader(new FileReader(Resources.DATA_SCORES)));
+
+			while ((linea = in.readLine()) != null) {
+				String[] valores = linea.split("[$]");
+				mapUsers.get(Integer.parseInt(valores[0])).setScore(Integer.parseInt(valores[1]));
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		} finally {
+			if (in != null) {
+				try {
+					in.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+	}
+	
+	public void storeScores() {
+		Writer file = null;
+		try {
+			file = new FileWriter(Resources.DATA_SCORES);
+			for(int mapKey = 1; mapKey < mapUsers.size()+1; mapKey++) {
+				file.write(mapKey+"$"+mapUsers.get(mapKey).getScore());
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		} finally {
+			if (file != null) {
+				try {
+					file.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+	}
+	
 	private void printCurrentUserName() {
 		FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal(Resources.FONT_BRODWAY));
 		FreeTypeFontParameter parameter = new FreeTypeFontParameter();
