@@ -2,6 +2,7 @@ package jakoop.com;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
@@ -68,7 +69,15 @@ public class HallOfFameScreen implements Screen {
 
 	private void createScoresArray() {
 		userList = new ArrayList<User>(InvadersGame.getMainMenuScreen().getMapUsers().values());	
-		Collections.sort(userList, (user1, user2) -> user2.getScore() - user1.getScore());		
+		//Collections.sort(userList, (user1, user2) -> user2.getScore() - user1.getScore());		
+		Collections.sort(userList, new Comparator<User>() {
+
+			@Override
+			public int compare(User u1, User u2) {
+				return Integer.compare(u2.getScore(), u1.getScore());
+			}
+			
+		});
 	}
 
 	public void createButton(int x, int y, int id) {
