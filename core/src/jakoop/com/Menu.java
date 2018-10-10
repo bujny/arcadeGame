@@ -3,11 +3,13 @@ package jakoop.com;
 import java.util.HashMap;
 import java.util.Map;
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintStream;
 import java.io.Writer;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
@@ -63,6 +65,7 @@ public class Menu implements Screen {
 		main = Gdx.audio.newMusic(Gdx.files.internal(Resources.MUSIC_MAIN));
 		createUsers();
 		loadCurrentUser();
+		loadScores();
 		printCurrentUserName();
 		newPlayerScreen = new PlayerScreen(game);
 		howToPayScreen = new HowToPlayScreen(game);
@@ -129,6 +132,55 @@ public class Menu implements Screen {
 		}
 	}
 
+	public void loadScores() {
+		BufferedReader in = null;
+		String linea;
+		try {
+			in = new BufferedReader(new BufferedReader(new FileReader(Resources.DATA_SCORES)));
+
+			while ((linea = in.readLine()) != null) {
+				String[] valores = linea.split("[$]");
+				mapUsers.get(Integer.parseInt(valores[0])).setScore(Integer.parseInt(valores[1]));
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		} finally {
+			if (in != null) {
+				try {
+					in.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+	}
+	
+	public void storeScores() {
+		BufferedWriter file = null;
+		FileWriter writer = null;
+		try {
+			writer = new FileWriter(Resources.DATA_SCORES);
+			file = new BufferedWriter(writer);
+			for(int mapKey = 1; mapKey < mapUsers.size()+1; mapKey++) {
+				file.write(mapKey+"$"+mapUsers.get(mapKey).getScore());
+				file.newLine();
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (file != null) {
+					file.close();
+				} 
+				if (writer != null) {
+					file.close();
+				} 
+			}catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+	}
+	
 	private void printCurrentUserName() {
 		FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal(Resources.FONT_BRODWAY));
 		FreeTypeFontParameter parameter = new FreeTypeFontParameter();
@@ -285,7 +337,6 @@ public class Menu implements Screen {
 			@Override
 			public void changed(ChangeEvent arg0, Actor arg1) {
 				button.play();
-				storePlayer();
 				main.stop();
 				mainStage.dispose();
 				game.dispose();
@@ -350,7 +401,7 @@ public class Menu implements Screen {
 	@Override
 	public void dispose() {
 		storePlayer();
-
+		storeScores();
 	}
 
 	@Override
