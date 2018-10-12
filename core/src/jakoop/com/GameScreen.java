@@ -6,7 +6,6 @@ import java.util.Iterator;
 import java.util.Map;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.GL20;
@@ -45,6 +44,7 @@ public class GameScreen implements Screen {
 	private float combo;
 	private BitmapFont scoreFont;
 	DecimalFormat df;
+	private static boolean flag = false;
 
 	public GameScreen(final InvadersGame game) {
 		this.isGameOver = false;
@@ -118,16 +118,23 @@ public class GameScreen implements Screen {
 			} else if (isVictory) {
 				spriteBatch.draw(youWinTexture, 340, 220, 600, 300);
 			}
-			if (Gdx.input.isKeyPressed(Keys.ANY_KEY)) {
-				try {
-					Thread.sleep(1000);
-					recordScore();
-					this.dispose();
-					game.setScreen(InvadersGame.getMainMenuScreen());
-				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+
+			if(!flag) {
+				flag = true;
+				Gdx.app.postRunnable(new Runnable() {
+			         @Override
+			         public void run() {
+			        	 try {
+			        		 Thread.sleep(2500);
+			        		 stage.dispose();
+				             recordScore();
+							 game.setScreen(InvadersGame.getMainMenuScreen());
+						} catch (InterruptedException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}	 
+			         }
+				});
 			}
 
 		} else {
@@ -247,7 +254,7 @@ public class GameScreen implements Screen {
 
 	@Override
 	public void dispose() {
-		stage.dispose();
+		
 		// TODO Auto-generated method stub
 	}
 
